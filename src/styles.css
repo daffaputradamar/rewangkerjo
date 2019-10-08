@@ -1,1 +1,90 @@
 /* You can add global styles to this file, and also import other style files */
+html {
+  height: 100%;
+}
+body {
+  min-height: 100%;
+}
+.bg-background {
+  min-height: 100vh;
+  background: url(./assets/img/wavy.png) no-repeat bottom right fixed;
+  background-size: cover;
+}
+
+.text-purple {
+  color: #897d96;
+}
+
+.btn-purple {
+  border-color: #826fd6 !important;
+  color: #fff !important;
+  background-color: #826fd6 !important;
+}
+
+.btn-purple:hover {
+  border-color: #6953ce !important;
+  color: #fff !important;
+  background-color: #826fd6 !important;
+}
+
+.btn-purple:focus,
+.btn-purple.focus {
+  box-shadow: 0 0 0 0.2rem rgba(130, 111, 214, 0.5);
+}
+
+.btn-purple.disabled,
+.btn-purple:disabled {
+  color: #fff;
+  background-color: #826fd6;
+  border-color: #826fd6;
+}
+
+.btn-purple:not(:disabled):not(.disabled):active,
+.btn-purple:not(:disabled):not(.disabled).active,
+.show > .btn-purple.dropdown-toggle {
+  color: #fff;
+  background-color: #5f47ca;
+  border-color: #553bc7;
+}
+
+.btn-purple:not(:disabled):not(.disabled):active:focus,
+.btn-purple:not(:disabled):not(.disabled).active:focus,
+.show > .btn-purple.dropdown-toggle:focus {
+  box-shadow: 0 0 0 0.2rem rgba(130, 111, 214, 0.5);
+}
+
+.btn-outline-purple {
+  border-color: #826fd6 !important;
+  color: #826fd6 !important;
+  background-color: transparent !important;
+}
+
+.btn-outline-purple:hover {
+  border-color: #826fd6 !important;
+  color: white !important;
+  background-color: #826fd6 !important;
+}
+.btn-outline-purple:focus,
+.btn-outline-purple.focus {
+  box-shadow: 0 0 0 0.2rem rgba(130, 111, 214, 0.5);
+}
+
+.btn-outline-purple.disabled,
+.btn-outline-purple:disabled {
+  color: #826fd6;
+  background-color: transparent;
+}
+
+.btn-outline-purple:not(:disabled):not(.disabled):active,
+.btn-outline-purple:not(:disabled):not(.disabled).active,
+.show > .btn-outline-purple.dropdown-toggle {
+  color: #fff;
+  background-color: #826fd6;
+  border-color: #826fd6;
+}
+
+.btn-outline-purple:not(:disabled):not(.disabled):active:focus,
+.btn-outline-purple:not(:disabled):not(.disabled).active:focus,
+.show > .btn-outline-purple.dropdown-toggle:focus {
+  box-shadow: 0 0 0 0.2rem rgba(130, 111, 214, 0.5);
+}
