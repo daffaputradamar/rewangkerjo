@@ -52,11 +52,11 @@ export class EventService {
       _id: "3",
       addressEvent: "Lowokwaru, Malang",
       category: {
-        _id: "1",
-        name: "wedding",
-        color: "#F368E0"
+        _id: "2",
+        name: "gathering",
+        color: "#54A0FF"
       },
-      client: "wedding belum",
+      client: "gathering belum",
       phone: "085123456789",
       pic: {
         _id: "1",
@@ -73,11 +73,11 @@ export class EventService {
       _id: "4",
       addressEvent: "Lowokwaru, Malang",
       category: {
-        _id: "2",
-        name: "gathering",
-        color: "#54A0FF"
+        _id: "1",
+        name: "wedding",
+        color: "#F368E0"
       },
-      client: "gathering belum",
+      client: "wedding belum",
       phone: "085123456789",
       pic: {
         _id: "1",

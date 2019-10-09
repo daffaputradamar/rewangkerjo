@@ -1,13 +1,13 @@
 <div class="container mt-5">
-  <h2 class="font-weight-bolder mb-4">Kategori</h2>
+  <h4 class="font-weight-bolder mb-4">Kategori</h4>
   <app-categories
     (setCategorySelected)="setCategorySelected($event)"
     [categories]="categories"
   ></app-categories>
-  <h2 class="font-weight-bolder mt-5">Acara Saat Ini</h2>
+  <h4 class="font-weight-bolder mt-5">Acara Saat Ini</h4>
   <hr class="mb-4" />
   <app-events [events]="eventsOngoing"></app-events>
-  <h2 class="font-weight-bolder mt-5">Riwayat Acara</h2>
+  <h4 class="font-weight-bolder mt-5">Riwayat Acara</h4>
   <hr class="mb-4" />
   <app-events [events]="eventsFinished"></app-events>
 </div>
