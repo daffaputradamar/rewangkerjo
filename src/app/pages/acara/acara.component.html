@@ -1,0 +1,21 @@
+<div class="container mt-5">
+  <h2 class="font-weight-bolder mb-4">Kategori</h2>
+  <div class="row">
+    <div class="col-2" *ngFor="let category of categories">
+      <button
+        class="btn btn-block font-weight-bold"
+        [ngStyle]="{
+          'background-color': category.isSelected
+            ? category.color
+            : 'transparent',
+          color: category.isSelected ? '#fff' : category.color,
+          'border-color': !category.isSelected ? category.color : '',
+          'border-width': !category.isSelected ? medium : ''
+        }"
+        ng-if
+      >
+        {{ category.name.toUpperCase() }}
+      </button>
+    </div>
+  </div>
+</div>
