@@ -28,7 +28,7 @@
         <ng-template #loggedIn>
           <li class="nav-item">
             <a
-              routerLink="/login"
+              routerLink="/acara"
               class="nav-link text-dark text-medium font-weight-bold"
               >Acara</a
             >
@@ -40,12 +40,20 @@
               >Karyawan</a
             >
           </li>
-          <li class="nav-item ml-5">
+          <li class="nav-item ml-3">
             <a
               routerLink="/login"
               class="nav-link text-dark text-medium font-weight-bold"
               >Profil</a
             >
+          </li>
+          <li class="nav-item ml-5">
+            <button
+              class="btn nav-link text-dark text-medium font-weight-bold"
+              (click)="logout()"
+            >
+              Logout
+            </button>
           </li>
         </ng-template>
       </ul>

@@ -1,4 +1,4 @@
-import { Injectable } from "@angular/core";
+import { Injectable, EventEmitter } from "@angular/core";
 import { apiHost } from "../../assets/config/config";
 
 import { HttpClient } from "@angular/common/http";
@@ -8,20 +8,32 @@ import { Router } from "@angular/router";
   providedIn: "root"
 })
 export class AuthService {
+  loginStatus: boolean = true;
   private apiHost = apiHost;
-
   private jwt: string;
+  loginStatusUpdate = new EventEmitter<boolean>();
+
+  setLoginStatus(status: boolean) {
+    this.loginStatus = status;
+    this.loginStatusUpdate.emit(this.loginStatus);
+  }
+
+  getLoginStatus(): boolean {
+    return this.loginStatus;
+  }
 
   constructor(private router: Router, private http: HttpClient) {}
 
-  public isLoggedIn(): boolean {
-    // let isLoggedIn = localStorage.getItem("authToken") ? true : false;
-    let isLoggedIn = true;
-    return isLoggedIn;
+  public login() {
+    this.loginStatus = true;
+    this.loginStatusUpdate.emit(this.loginStatus);
+    this.router.navigate(["/acara"]);
   }
 
-  logout() {
-    localStorage.removeItem("authToken");
+  public logout() {
+    // localStorage.removeItem("authToken");
+    this.loginStatus = false;
+    this.loginStatusUpdate.emit(this.loginStatus);
     this.router.navigate(["/"]);
   }
 }

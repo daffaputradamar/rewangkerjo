@@ -9,7 +9,7 @@ export class AuthIfAuthenticatedService implements CanActivate {
   constructor(private router: Router, private authService: AuthService) {}
 
   canActivate(): boolean {
-    if (this.authService.isLoggedIn()) {
+    if (this.authService.getLoginStatus()) {
       this.router.navigate(["/acara"]);
       return false;
     }
