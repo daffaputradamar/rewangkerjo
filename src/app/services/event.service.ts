@@ -14,7 +14,7 @@ export class EventService {
         name: "wedding",
         color: "#F368E0"
       },
-      client: "nama klien",
+      client: "wedding sudah",
       phone: "085123456789",
       pic: {
         _id: "1",
@@ -35,7 +35,28 @@ export class EventService {
         name: "gathering",
         color: "#54A0FF"
       },
-      client: "nama klien",
+      client: "gathering sudah",
+      phone: "085123456789",
+      pic: {
+        _id: "1",
+        address: "Lowokwaru, Malang",
+        name: "Robertus Wanda",
+        phone: "081987654321",
+        position: 1,
+        username: "robertuswanda"
+      },
+      isFinished: true,
+      createdAt: new Date()
+    },
+    {
+      _id: "3",
+      addressEvent: "Lowokwaru, Malang",
+      category: {
+        _id: "1",
+        name: "wedding",
+        color: "#F368E0"
+      },
+      client: "wedding belum",
       phone: "085123456789",
       pic: {
         _id: "1",
@@ -49,14 +70,14 @@ export class EventService {
       createdAt: new Date()
     },
     {
-      _id: "3",
+      _id: "4",
       addressEvent: "Lowokwaru, Malang",
       category: {
-        _id: "1",
-        name: "wedding",
-        color: "#F368E0"
+        _id: "2",
+        name: "gathering",
+        color: "#54A0FF"
       },
-      client: "nama klien",
+      client: "gathering belum",
       phone: "085123456789",
       pic: {
         _id: "1",

@@ -12,7 +12,7 @@ export class AcaraComponent implements OnInit {
   categories: ICategory[];
   events: IEvent[];
 
-  eventsUnfinished: IEvent[];
+  eventsOngoing: IEvent[];
   eventsFinished: IEvent[];
 
   constructor(
@@ -22,25 +22,50 @@ export class AcaraComponent implements OnInit {
 
   ngOnInit() {
     const categoriesTemp = this.categoryService.getCategories();
-    categoriesTemp.forEach(cat => (cat.isSelected = false));
-    categoriesTemp[0].isSelected = true;
+    categoriesTemp.forEach(cat => (cat.isSelected = true));
     this.categories = categoriesTemp;
     this.events = this.eventService.getEvents();
-    this.eventsFinished = this.getFinishedEvent();
-    this.eventsUnfinished = this.getUnfinishedEvent();
+    this.getFinishedEvent();
+    this.getUnfinishedEvent();
   }
 
-  getFinishedEvent(): IEvent[] {
-    const finishedEvent: IEvent[] = this.events.filter(
+  getSelectedCategory(): IEvent[] {
+    const selectedEvent: IEvent[] = this.events.filter(event => {
+      const cat = this.categories.filter(category => {
+        return category._id === event.category._id;
+      });
+      if (cat[0].isSelected) {
+        return event;
+      }
+    });
+    return selectedEvent;
+  }
+
+  private getFinishedEvent() {
+    const selectedEvent = this.getSelectedCategory();
+    const finishedEvent: IEvent[] = selectedEvent.filter(
       event => event.isFinished
     );
-    return finishedEvent;
+    this.eventsFinished = finishedEvent;
   }
 
-  getUnfinishedEvent(): IEvent[] {
-    const unfinishedEvent: IEvent[] = this.events.filter(
+  private getUnfinishedEvent() {
+    const selectedEvent = this.getSelectedCategory();
+    const unfinishedEvent: IEvent[] = selectedEvent.filter(
       event => !event.isFinished
     );
-    return unfinishedEvent;
+    this.eventsOngoing = unfinishedEvent;
+  }
+
+  setCategorySelected($event) {
+    for (let i = 0; i < this.categories.length; i++) {
+      if (this.categories[i]._id === $event) {
+        this.categories[i].isSelected = !this.categories[i].isSelected;
+        break;
+      }
+    }
+    this.getFinishedEvent();
+    this.getUnfinishedEvent();
+    console.log(this.eventsFinished, this.eventsOngoing);
   }
 }

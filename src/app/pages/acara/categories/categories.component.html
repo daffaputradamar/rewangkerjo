@@ -1,0 +1,8 @@
+<div class="row">
+  <div class="col-sm-6 col-md-2" *ngFor="let category of categories">
+    <app-category-item
+      (setSelected)="setSelected($event)"
+      [category]="category"
+    ></app-category-item>
+  </div>
+</div>

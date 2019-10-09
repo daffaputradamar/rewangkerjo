@@ -1,0 +1,39 @@
+<div
+  class="card"
+  [ngStyle]="{
+    'border-color': event.category.color
+  }"
+>
+  <div class="card-body">
+    <div class="row">
+      <div class="col">
+        <span
+          [ngStyle]="{
+            'background-color': event.category.color,
+            color: '#fff'
+          }"
+          class="px-3 py-2 rounded"
+        >
+          <small class="font-weight-bold">{{
+            event.category.name.toUpperCase()
+          }}</small></span
+        >
+      </div>
+      <div class="col text-right">
+        <fa-icon
+          [icon]="faExternalLinkAlt"
+          [ngStyle]="{
+            color: event.category.color
+          }"
+        ></fa-icon>
+      </div>
+    </div>
+    <hr />
+    <h6 class="font-weight-bold">Klien</h6>
+    <p>{{ event.client }}</p>
+    <h6 class="font-weight-bold">Alamat</h6>
+    <p>{{ event.addressEvent }}</p>
+    <h6 class="font-weight-bold">Tanggal</h6>
+    <p>{{ formattedDate }}</p>
+  </div>
+</div>

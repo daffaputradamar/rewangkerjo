@@ -1,0 +1,12 @@
+<button
+  class="btn btn-block font-weight-bold"
+  [ngStyle]="{
+    'background-color': category.isSelected ? category.color : 'transparent',
+    color: category.isSelected ? '#fff' : category.color,
+    'border-color': !category.isSelected ? category.color : '',
+    'border-width': !category.isSelected ? medium : ''
+  }"
+  (click)="setId()"
+>
+  {{ category.name.toUpperCase() }}
+</button>
