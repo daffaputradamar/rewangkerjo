@@ -11,6 +11,10 @@ body {
   background-size: cover;
 }
 
+.disable-decoration {
+  text-decoration: none !important;
+}
+
 .text-purple {
   color: #897d96;
 }

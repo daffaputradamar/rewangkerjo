@@ -3,6 +3,7 @@ import { Routes, RouterModule } from "@angular/router";
 import { BerandaComponent } from "./pages/beranda/beranda.component";
 import { LoginComponent } from "./pages/login/login.component";
 import { AcaraComponent } from "./pages/acara/acara.component";
+import { AcaraDetailComponent } from "./pages/acara-detail/acara-detail.component";
 import { AuthIfAuthenticatedService } from "./services/auth-if-authenticated.service";
 import { AuthGuardService } from "./services/auth-guard.service";
 
@@ -20,6 +21,11 @@ const routes: Routes = [
   {
     path: "acara",
     component: AcaraComponent,
+    canActivate: [AuthGuardService]
+  },
+  {
+    path: "acara-detail/:id",
+    component: AcaraDetailComponent,
     canActivate: [AuthGuardService]
   }
 ];

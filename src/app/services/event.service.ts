@@ -67,6 +67,52 @@ export class EventService {
         username: "robertuswanda"
       },
       isFinished: false,
+      vendors: [
+        {
+          _id: "1",
+          name: "Vendor 1",
+          phone: "085123456789"
+        },
+        {
+          _id: "2",
+          name: "Vendor 2",
+          phone: "085987654321"
+        }
+      ],
+      committees: [
+        {
+          _id: "1",
+          address: "Lowokwaru, Malang",
+          name: "Robertus Wanda",
+          phone: "081987654321",
+          position: 1,
+          username: "robertuswanda"
+        },
+        {
+          _id: "2",
+          address: "Lowokwaru, Malang",
+          name: "Robertus Bertus",
+          phone: "081987654321",
+          position: 1,
+          username: "robertuswanda"
+        },
+        {
+          _id: "3",
+          address: "Lowokwaru, Malang",
+          name: "Wanda Bertus",
+          phone: "081987654321",
+          position: 2,
+          username: "robertuswanda"
+        },
+        {
+          _id: "4",
+          address: "Lowokwaru, Malang",
+          name: "Wanda Wanda",
+          phone: "081987654321",
+          position: 2,
+          username: "robertuswanda"
+        }
+      ],
       createdAt: new Date()
     },
     {
@@ -87,6 +133,52 @@ export class EventService {
         position: 1,
         username: "robertuswanda"
       },
+      vendors: [
+        {
+          _id: "1",
+          name: "Vendor 1",
+          phone: "085123456789"
+        },
+        {
+          _id: "2",
+          name: "Vendor 2",
+          phone: "085987654321"
+        }
+      ],
+      committees: [
+        {
+          _id: "1",
+          address: "Lowokwaru, Malang",
+          name: "Robertus Wanda",
+          phone: "081987654321",
+          position: 1,
+          username: "robertuswanda"
+        },
+        {
+          _id: "2",
+          address: "Lowokwaru, Malang",
+          name: "Robertus Bertus",
+          phone: "081987654321",
+          position: 1,
+          username: "robertuswanda"
+        },
+        {
+          _id: "3",
+          address: "Lowokwaru, Malang",
+          name: "Wanda Bertus",
+          phone: "081987654321",
+          position: 2,
+          username: "robertuswanda"
+        },
+        {
+          _id: "4",
+          address: "Lowokwaru, Malang",
+          name: "Wanda Wanda",
+          phone: "081987654321",
+          position: 2,
+          username: "robertuswanda"
+        }
+      ],
       isFinished: false,
       createdAt: new Date()
     }
@@ -95,5 +187,17 @@ export class EventService {
 
   public getEvents(): IEvent[] {
     return this.events;
+  }
+
+  public showEvent(id: string): IEvent | null {
+    let event: IEvent;
+    for (let i = 0; i < this.events.length; i++) {
+      if (this.events[i]._id === id) {
+        event = this.events[i];
+        return event;
+        break;
+      }
+    }
+    return null;
   }
 }

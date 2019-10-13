@@ -13,6 +13,30 @@ export class EmployeeService {
       phone: "081987654321",
       position: 1,
       username: "robertuswanda"
+    },
+    {
+      _id: "2",
+      address: "Lowokwaru, Malang",
+      name: "Robertus Bertus",
+      phone: "081987654321",
+      position: 1,
+      username: "robertuswanda"
+    },
+    {
+      _id: "3",
+      address: "Lowokwaru, Malang",
+      name: "Wanda Bertus",
+      phone: "081987654321",
+      position: 2,
+      username: "robertuswanda"
+    },
+    {
+      _id: "4",
+      address: "Lowokwaru, Malang",
+      name: "Wanda Wanda",
+      phone: "081987654321",
+      position: 2,
+      username: "robertuswanda"
     }
   ];
   constructor() {}

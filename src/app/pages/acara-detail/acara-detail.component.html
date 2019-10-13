@@ -1,0 +1,23 @@
+<div class="container mt-5">
+  <app-acara-deskripsi
+    [event]="event"
+    [date]="formattedDate"
+  ></app-acara-deskripsi>
+  <h4 class="font-weight-bolder mt-5">Panitia</h4>
+  <hr class="mb-3" />
+  <ng-container *ngIf="!committees; else committeesIsFound">
+    <p>Panitia kosong</p>
+  </ng-container>
+  <ng-template #committeesIsFound>
+    <app-panitia-list [committees]="committees"></app-panitia-list>
+  </ng-template>
+
+  <h4 class="font-weight-bolder mt-4">Vendor</h4>
+  <hr class="mb-3" />
+  <ng-container *ngIf="!vendors; else vendorIsFound">
+    <p>Vendor kosong</p>
+  </ng-container>
+  <ng-template #vendorIsFound>
+    <app-vendor-list [vendors]="vendors"></app-vendor-list>
+  </ng-template>
+</div>

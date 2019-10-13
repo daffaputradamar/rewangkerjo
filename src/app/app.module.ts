@@ -14,6 +14,16 @@ import { CategoriesComponent } from "./pages/acara/categories/categories.compone
 import { CategoryItemComponent } from "./pages/acara/categories/category-item/category-item.component";
 import { EventsComponent } from "./components/events/events.component";
 import { EventItemComponent } from "./components/events/event-item/event-item.component";
+import { AcaraDetailComponent } from "./pages/acara-detail/acara-detail.component";
+import { AcaraDeskripsiComponent } from "./pages/acara-detail/acara-deskripsi/acara-deskripsi.component";
+import { PanitiaListComponent } from "./pages/acara-detail/panitia-list/panitia-list.component";
+import { VendorListComponent } from "./pages/acara-detail/vendor-list/vendor-list.component";
+import { PenugasanListComponent } from "./pages/acara-detail/penugasan-list/penugasan-list.component";
+import { DokumenListComponent } from "./pages/acara-detail/dokumen-list/dokumen-list.component";
+import { PanitiaItemComponent } from "./pages/acara-detail/panitia-list/panitia-item/panitia-item.component";
+import { VendorItemComponent } from "./pages/acara-detail/vendor-list/vendor-item/vendor-item.component";
+import { PenugasanItemComponent } from "./pages/acara-detail/penugasan-list/penugasan-item/penugasan-item.component";
+import { EmployeeComponent } from "./components/buttons/employee/employee.component";
 
 @NgModule({
   declarations: [
@@ -25,7 +35,17 @@ import { EventItemComponent } from "./components/events/event-item/event-item.co
     CategoriesComponent,
     CategoryItemComponent,
     EventsComponent,
-    EventItemComponent
+    EventItemComponent,
+    AcaraDetailComponent,
+    AcaraDeskripsiComponent,
+    PanitiaListComponent,
+    VendorListComponent,
+    PenugasanListComponent,
+    DokumenListComponent,
+    PanitiaItemComponent,
+    VendorItemComponent,
+    PenugasanItemComponent,
+    EmployeeComponent
   ],
   imports: [
     BrowserModule,

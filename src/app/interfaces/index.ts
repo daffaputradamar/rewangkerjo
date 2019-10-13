@@ -12,27 +12,27 @@ export interface IEvent {
   phone: string;
   pic: IEmployee;
   category: ICategory;
-  committees?: [IEmployee];
-  vendors?: [IVendor];
-  documents?: [
-    {
-      path: string;
-      deskripsi: string;
-    }
-  ];
+  committees?: IEmployee[];
+  vendors?: IVendor[];
+  documents?: IAssignment[];
   isFinished: boolean;
-  assignments?: [
-    {
-      assignment: string;
-      isFinished: boolean;
-    }
-  ];
+  assignments?: IDocument[];
   createdAt: Date;
 }
 
 export interface IAdmin {
   _id: string;
   username: string;
+}
+
+export interface IDocument {
+  path: string;
+  deskripsi: string;
+}
+
+export interface IAssignment {
+  assignment: string;
+  isFinished: boolean;
 }
 
 export interface IEmployee {

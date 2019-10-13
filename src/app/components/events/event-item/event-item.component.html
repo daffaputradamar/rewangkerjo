@@ -5,29 +5,31 @@
   }"
 >
   <div class="card-body">
-    <div class="row">
-      <div class="col">
-        <span
-          [ngStyle]="{
-            'background-color': event.category.color,
-            color: '#fff'
-          }"
-          class="px-3 py-2 rounded"
-        >
-          <small class="font-weight-bold">{{
-            event.category.name.toUpperCase()
-          }}</small></span
-        >
+    <a routerLink="/acara-detail/{{ event._id }}">
+      <div class="row">
+        <div class="col">
+          <span
+            [ngStyle]="{
+              'background-color': event.category.color,
+              color: '#fff'
+            }"
+            class="px-3 py-2 rounded disable-decoration"
+          >
+            <small class="font-weight-bold">{{
+              event.category.name.toUpperCase()
+            }}</small></span
+          >
+        </div>
+        <div class="col text-right">
+          <fa-icon
+            [icon]="faExternalLinkAlt"
+            [ngStyle]="{
+              color: event.category.color
+            }"
+          ></fa-icon>
+        </div>
       </div>
-      <div class="col text-right">
-        <fa-icon
-          [icon]="faExternalLinkAlt"
-          [ngStyle]="{
-            color: event.category.color
-          }"
-        ></fa-icon>
-      </div>
-    </div>
+    </a>
     <hr />
     <h6 class="font-weight-bold">Klien</h6>
     <p>{{ event.client }}</p>
