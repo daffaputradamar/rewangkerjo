@@ -1,1 +1,6 @@
-<p>penugasan-list works!</p>
+<div *ngFor="let assignment of assignments">
+  <app-penugasan-item
+    (setAssignmentStatus)="setAssignmentStatus($event)"
+    [assignment]="assignment"
+  ></app-penugasan-item>
+</div>

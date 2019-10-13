@@ -20,4 +20,25 @@
   <ng-template #vendorIsFound>
     <app-vendor-list [vendors]="vendors"></app-vendor-list>
   </ng-template>
+
+  <h4 class="font-weight-bolder mt-4">Penugasan</h4>
+  <hr class="mb-3" />
+  <ng-container *ngIf="!assignments; else assignmentIsFound">
+    <p>Tidak ada penugasan</p>
+  </ng-container>
+  <ng-template #assignmentIsFound>
+    <app-penugasan-list
+      (setAssignment)="setAssignment($event)"
+      [assignments]="assignments"
+    ></app-penugasan-list>
+  </ng-template>
+
+  <h4 class="font-weight-bolder mt-4">Dokumen</h4>
+  <hr class="mb-3" />
+  <ng-container *ngIf="!documents; else documentIsFound">
+    <p>Tidak ada dokumen</p>
+  </ng-container>
+  <ng-template #documentIsFound>
+    <app-dokumen-list [documents]="documents"></app-dokumen-list>
+  </ng-template>
 </div>

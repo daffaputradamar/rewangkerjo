@@ -14,9 +14,9 @@ export interface IEvent {
   category: ICategory;
   committees?: IEmployee[];
   vendors?: IVendor[];
-  documents?: IAssignment[];
+  documents?: IDocument[];
   isFinished: boolean;
-  assignments?: IDocument[];
+  assignments?: IAssignment[];
   createdAt: Date;
 }
 

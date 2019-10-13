@@ -20,6 +20,5 @@ export class PanitiaListComponent implements OnInit {
   ngOnInit() {
     this.staff = this.committees.filter(committee => committee.position === 1);
     this.crew = this.committees.filter(committee => committee.position === 2);
-    console.log(this.staff, this.crew);
   }
 }

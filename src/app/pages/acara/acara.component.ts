@@ -66,6 +66,5 @@ export class AcaraComponent implements OnInit {
     }
     this.getFinishedEvent();
     this.getUnfinishedEvent();
-    console.log(this.eventsFinished, this.eventsOngoing);
   }
 }

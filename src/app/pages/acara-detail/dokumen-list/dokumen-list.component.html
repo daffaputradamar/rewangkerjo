@@ -1,1 +1,5 @@
-<p>dokumen-list works!</p>
+<div class="row">
+  <div class="col-md-4 col-sm-12" *ngFor="let document of documents">
+    <app-dokumen-item [document]="document"></app-dokumen-item>
+  </div>
+</div>

@@ -79,6 +79,26 @@ export class EventService {
           phone: "085987654321"
         }
       ],
+      assignments: [
+        {
+          assignment: "Membuat proposal",
+          isFinished: true
+        },
+        {
+          assignment: "Membuat layout acara",
+          isFinished: false
+        }
+      ],
+      documents: [
+        {
+          path: "https://via.placeholder.com/300",
+          deskripsi: "Layout acara"
+        },
+        {
+          path: "https://via.placeholder.com/300",
+          deskripsi: "Foto tempat"
+        }
+      ],
       committees: [
         {
           _id: "1",
@@ -145,6 +165,26 @@ export class EventService {
           phone: "085987654321"
         }
       ],
+      assignments: [
+        {
+          assignment: "Membuat proposal",
+          isFinished: true
+        },
+        {
+          assignment: "Membuat layout acara",
+          isFinished: false
+        }
+      ],
+      documents: [
+        {
+          path: "https://via.placeholder.com/300",
+          deskripsi: "Layout acara"
+        },
+        {
+          path: "https://via.placeholder.com/300",
+          deskripsi: "Foto tempat"
+        }
+      ],
       committees: [
         {
           _id: "1",
@@ -199,5 +239,13 @@ export class EventService {
       }
     }
     return null;
+  }
+
+  public updateAnEvent(id: string, event: IEvent) {
+    for (let i = 0; i < this.events.length; i++) {
+      if (this.events[i]._id === id) {
+        this.events[i] = event;
+      }
+    }
   }
 }

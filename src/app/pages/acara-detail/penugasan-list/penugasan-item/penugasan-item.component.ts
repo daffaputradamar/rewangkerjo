@@ -1,15 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
+import { IAssignment } from "src/app/interfaces";
 
 @Component({
-  selector: 'app-penugasan-item',
-  templateUrl: './penugasan-item.component.html',
-  styleUrls: ['./penugasan-item.component.css']
+  selector: "app-penugasan-item",
+  templateUrl: "./penugasan-item.component.html",
+  styleUrls: ["./penugasan-item.component.css"]
 })
 export class PenugasanItemComponent implements OnInit {
+  @Input() assignment: IAssignment;
+  @Output() setAssignmentStatus = new EventEmitter<string>();
+  constructor() {}
 
-  constructor() { }
+  ngOnInit() {}
 
-  ngOnInit() {
+  setStatus() {
+    this.setAssignmentStatus.emit(this.assignment.assignment);
   }
-
 }
