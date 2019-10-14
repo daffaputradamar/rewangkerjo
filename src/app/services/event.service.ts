@@ -240,6 +240,15 @@ export class EventService {
     return null;
   }
 
+  public markAsFinished(id: string) {
+    for (let i = 0; i < this.events.length; i++) {
+      if (this.events[i]._id === id) {
+        this.events[i].isFinished = true;
+        break;
+      }
+    }
+  }
+
   public addEvent(event: IEvent) {
     this.events.push(event);
   }

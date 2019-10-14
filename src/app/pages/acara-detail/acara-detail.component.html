@@ -117,4 +117,12 @@
   <ng-template #documentIsFound>
     <app-dokumen-list [documents]="documents"></app-dokumen-list>
   </ng-template>
+
+  <button
+    class="btn btn-block btn-outline-purple font-weight-bold mt-3"
+    *ngIf="!event.isFinished"
+    (click)="markAsFinished()"
+  >
+    Tandai Acara Selesai
+  </button>
 </div>

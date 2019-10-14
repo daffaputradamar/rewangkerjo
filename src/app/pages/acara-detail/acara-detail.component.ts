@@ -144,4 +144,8 @@ export class AcaraDetailComponent implements OnInit {
   updateAnEvent(event: IEvent) {
     this.eventService.updateAnEvent(this.event._id, event);
   }
+
+  markAsFinished() {
+    this.eventService.markAsFinished(this.event._id);
+  }
 }
