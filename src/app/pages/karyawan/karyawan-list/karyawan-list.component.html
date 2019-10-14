@@ -7,7 +7,10 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let employee of employees">
+    <tr
+      *ngFor="let employee of employees"
+      routerLink="/karyawan-detail/{{ employee._id }}"
+    >
       <td>{{ employee.name }}</td>
       <td>{{ employee.address }}</td>
       <td>{{ employee.phone }}</td>

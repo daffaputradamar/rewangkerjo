@@ -235,7 +235,6 @@ export class EventService {
       if (this.events[i]._id === id) {
         event = this.events[i];
         return event;
-        break;
       }
     }
     return null;

@@ -45,7 +45,25 @@ export class EmployeeService {
     return this.employees;
   }
 
+  public showEmployee(id: string): IEmployee {
+    for (let i = 0; i < this.employees.length; i++) {
+      if (this.employees[i]._id === id) {
+        return this.employees[i];
+      }
+    }
+    return null;
+  }
+
   public addEmployee(employee: IEmployee) {
     this.employees.push(employee);
+  }
+
+  public editEmployee(id: string, employee: IEmployee) {
+    for (let i = 0; i < this.employees.length; i++) {
+      if (this.employees[i]._id === id) {
+        this.employees[i] = employee;
+        break;
+      }
+    }
   }
 }

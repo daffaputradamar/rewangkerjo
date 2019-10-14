@@ -7,6 +7,7 @@ import { AcaraDetailComponent } from "./pages/acara-detail/acara-detail.componen
 import { AuthIfAuthenticatedService } from "./services/auth-if-authenticated.service";
 import { AuthGuardService } from "./services/auth-guard.service";
 import { KaryawanComponent } from "./pages/karyawan/karyawan.component";
+import { KaryawanDetailComponent } from "./pages/karyawan-detail/karyawan-detail.component";
 
 const routes: Routes = [
   {
@@ -32,6 +33,11 @@ const routes: Routes = [
   {
     path: "karyawan",
     component: KaryawanComponent,
+    canActivate: [AuthGuardService]
+  },
+  {
+    path: "karyawan-detail/:id",
+    component: KaryawanDetailComponent,
     canActivate: [AuthGuardService]
   }
 ];

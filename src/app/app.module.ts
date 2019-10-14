@@ -28,6 +28,7 @@ import { DokumenItemComponent } from "./pages/acara-detail/dokumen-list/dokumen-
 import { KaryawanComponent } from './pages/karyawan/karyawan.component';
 import { KaryawanListComponent } from './pages/karyawan/karyawan-list/karyawan-list.component';
 import { KaryawanCategoriesComponent } from './pages/karyawan/karyawan-categories/karyawan-categories.component';
+import { KaryawanDetailComponent } from './pages/karyawan-detail/karyawan-detail.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,8 @@ import { KaryawanCategoriesComponent } from './pages/karyawan/karyawan-categorie
     DokumenItemComponent,
     KaryawanComponent,
     KaryawanListComponent,
-    KaryawanCategoriesComponent
+    KaryawanCategoriesComponent,
+    KaryawanDetailComponent
   ],
   imports: [
     BrowserModule,
