@@ -1,18 +1,37 @@
 <div class="container mt-5">
-  <span
-    class="btn font-weight-bold px-5 py-2"
-    [ngStyle]="{
-      'background-color': employee.position === 1 ? colorStaff : colorCrew,
-      color: '#fff'
-    }"
-  >
-    <ng-container *ngIf="employee.position === 1; else elsePosition">
-      Staf
-    </ng-container>
-    <ng-template #elsePosition>
-      Kru
-    </ng-template>
-  </span>
+  <div class="row align-items-center">
+    <div class="col-md-11">
+      <span
+        class="btn font-weight-bold px-5 py-2"
+        [ngStyle]="{
+          'background-color': employee.position === 1 ? colorStaff : colorCrew,
+          color: '#fff'
+        }"
+      >
+        <ng-container *ngIf="employee.position === 1; else elsePosition">
+          Staf
+        </ng-container>
+        <ng-template #elsePosition>
+          Kru
+        </ng-template>
+      </span>
+    </div>
+    <div class="col-md-1">
+      <div class="dropdown text-right">
+        <span
+          role="button"
+          id="dropdownDeleteEmployee"
+          data-toggle="dropdown"
+          aria-haspopup="true"
+          aria-expanded="false"
+          ><fa-icon [icon]="faEllipsisV"></fa-icon
+        ></span>
+        <div class="dropdown-menu" aria-labelledby="dropdownDeleteEmployee">
+          <a class="dropdown-item" (click)="deleteEmployee()">Delete</a>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <div class="row mt-5">
     <div class="col-6 text-left">

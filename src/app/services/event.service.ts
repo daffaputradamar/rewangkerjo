@@ -240,6 +240,10 @@ export class EventService {
     return null;
   }
 
+  public addEvent(event: IEvent) {
+    this.events.push(event);
+  }
+
   public addCommittee(id: string, employee: IEmployee) {
     for (let i = 0; i < this.events.length; i++) {
       if (this.events[i]._id === id) {

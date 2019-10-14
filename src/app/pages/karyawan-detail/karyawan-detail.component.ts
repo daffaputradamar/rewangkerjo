@@ -1,9 +1,9 @@
 import { Component, OnInit } from "@angular/core";
 import { EmployeeService } from "src/app/services/employee.service";
 import { IEmployee } from "src/app/interfaces";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 
-import { faEdit } from "@fortawesome/free-solid-svg-icons";
+import { faEdit, faEllipsisV } from "@fortawesome/free-solid-svg-icons";
 import { crew, staff } from "../../../assets/color";
 
 @Component({
@@ -19,6 +19,7 @@ export class KaryawanDetailComponent implements OnInit {
   colorCrew = crew;
   colorStaff = staff;
   faEdit = faEdit;
+  faEllipsisV = faEllipsisV;
 
   inputName: string;
   inputAddress: string;
@@ -27,7 +28,8 @@ export class KaryawanDetailComponent implements OnInit {
 
   constructor(
     private activatedRoute: ActivatedRoute,
-    private employeeService: EmployeeService
+    private employeeService: EmployeeService,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -60,6 +62,11 @@ export class KaryawanDetailComponent implements OnInit {
     this.employee = this.employeeService.showEmployee(this.id);
     this.setEditStatus();
     this.resetForm();
+  }
+
+  deleteEmployee() {
+    this.employeeService.deleteEmployee(this.employee._id);
+    this.router.navigate(["karyawan"]);
   }
 
   resetForm() {

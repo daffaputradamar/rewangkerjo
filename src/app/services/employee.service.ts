@@ -66,4 +66,17 @@ export class EmployeeService {
       }
     }
   }
+
+  public deleteEmployee(id: string) {
+    for (let i = 0; i < this.employees.length; i++) {
+      if (this.employees[i]._id === id) {
+        this.employees.splice(i, 1);
+        break;
+      }
+      if (this.employees[i]._id === id) {
+        this.employees.splice(i, 1);
+        break;
+      }
+    }
+  }
 }
