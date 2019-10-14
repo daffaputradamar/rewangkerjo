@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from "@angular/core";
+import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
 import { IVendor } from "src/app/interfaces";
 
 @Component({
@@ -8,7 +8,13 @@ import { IVendor } from "src/app/interfaces";
 })
 export class VendorListComponent implements OnInit {
   @Input() vendors: IVendor[];
+
+  @Output() deleteVendor = new EventEmitter<string>();
   constructor() {}
 
   ngOnInit() {}
+
+  deleteAVendor($event) {
+    this.deleteVendor.emit($event);
+  }
 }

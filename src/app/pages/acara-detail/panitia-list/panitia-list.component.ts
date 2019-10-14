@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from "@angular/core";
+import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
 import { IEmployee } from "src/app/interfaces";
 import { crew, staff } from "../../../../assets/color";
 
@@ -9,10 +9,15 @@ import { crew, staff } from "../../../../assets/color";
 })
 export class PanitiaListComponent implements OnInit {
   @Input() committees: IEmployee[];
+  @Output() deletePanitia = new EventEmitter<string>();
   colorCrew = crew;
   colorStaff = staff;
 
   constructor() {}
 
   ngOnInit() {}
+
+  deleteAPanitia($event) {
+    this.deletePanitia.emit($event);
+  }
 }

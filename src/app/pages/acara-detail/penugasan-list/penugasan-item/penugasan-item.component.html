@@ -1,13 +1,32 @@
-<div class="form-check font-weight-bold mb-2">
-  <input
-    class="form-check-input"
-    type="checkbox"
-    value=""
-    id="{{ assignment.assignment }}"
-    [checked]="assignment.isFinished"
-    (change)="setStatus()"
-  />
-  <label class="form-check-label" for="{{ assignment.assignment }}">
-    {{ assignment.assignment }}
-  </label>
+<div class="row">
+  <div class="col-11">
+    <div class="form-check font-weight-bold mb-2">
+      <input
+        class="form-check-input"
+        type="checkbox"
+        value=""
+        id="{{ assignment.assignment }}"
+        [checked]="assignment.isFinished"
+        (change)="setStatus()"
+      />
+      <label class="form-check-label" for="{{ assignment.assignment }}">
+        {{ assignment.assignment }}
+      </label>
+    </div>
+  </div>
+  <div class="col-1">
+    <div class="dropdown">
+      <span
+        role="button"
+        id="dropdownDeleteAssignment"
+        data-toggle="dropdown"
+        aria-haspopup="true"
+        aria-expanded="false"
+        ><fa-icon [icon]="faEllipsisV"></fa-icon
+      ></span>
+      <div class="dropdown-menu" aria-labelledby="dropdownDeleteAssignment">
+        <a class="dropdown-item" (click)="deleteAssignment()">Delete</a>
+      </div>
+    </div>
+  </div>
 </div>

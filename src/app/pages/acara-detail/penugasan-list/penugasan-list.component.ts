@@ -9,11 +9,16 @@ import { IAssignment } from "src/app/interfaces";
 export class PenugasanListComponent implements OnInit {
   @Input() assignments: IAssignment[];
   @Output() setAssignment = new EventEmitter<string>();
+  @Output() deleteAssignment = new EventEmitter<string>();
   constructor() {}
 
   ngOnInit() {}
 
   setAssignmentStatus($event) {
     this.setAssignment.emit($event);
+  }
+
+  deleteAnAssignment($event) {
+    this.deleteAssignment.emit($event);
   }
 }

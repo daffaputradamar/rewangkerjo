@@ -12,6 +12,7 @@ import { ActivatedRoute } from "@angular/router";
 import { EventService } from "src/app/services/event.service";
 import { faEdit } from "@fortawesome/free-solid-svg-icons";
 import { EmployeeService } from "src/app/services/employee.service";
+import { VendorService } from "src/app/services/vendor.service";
 
 @Component({
   selector: "app-acara-detail",
@@ -27,15 +28,22 @@ export class AcaraDetailComponent implements OnInit {
   assignments: IAssignment[];
   documents: IDocument[];
   employees: IEmployee[];
+  availableVendors: IVendor[];
   faEdit = faEdit;
-  selectedOption: string;
+
+  selectedEmployee: string;
+  selectedVendor: string;
+  inputAssignment: string;
 
   editPanitia = false;
+  editVendor = false;
+  editAssignment = false;
 
   constructor(
     private activatedRoute: ActivatedRoute,
     private eventService: EventService,
-    private employeeService: EmployeeService
+    private employeeService: EmployeeService,
+    private vendorService: VendorService
   ) {}
 
   ngOnInit() {
@@ -43,31 +51,83 @@ export class AcaraDetailComponent implements OnInit {
       params => (this.id = params.get("id"))
     );
     this.event = this.eventService.showEvent(this.id);
-    this.employees = this.employeeService.getEmployees();
     this.formattedDate = formatDate(this.event.createdAt);
     this.committees = this.event.committees;
     this.vendors = this.event.vendors;
     this.assignments = this.event.assignments;
     this.documents = this.event.documents;
 
-    this.selectedOption = "1";
+    this.employees = this.employeeService.getEmployees();
+    this.availableVendors = this.vendorService.getVendors();
+
+    this.selectedEmployee = "1";
+    this.selectedVendor = "1";
+    this.inputAssignment = "";
   }
 
   setEditPanitia() {
     this.editPanitia = !this.editPanitia;
-    console.log(this.editPanitia);
+  }
+
+  setEditVendor() {
+    this.editVendor = !this.editVendor;
+  }
+
+  setEditAssignment() {
+    this.editAssignment = !this.editAssignment;
   }
 
   addPanitia() {
     let committee: IEmployee;
     for (let i = 0; i < this.employees.length; i++) {
-      if (this.employees[i]._id === this.selectedOption) {
+      if (this.employees[i]._id === this.selectedEmployee) {
         committee = this.employees[i];
       }
     }
     this.eventService.addCommittee(this.event._id, committee);
     this.event = this.eventService.showEvent(this.event._id);
     this.committees = this.event.committees;
+  }
+
+  addVendor() {
+    let vendor: IVendor;
+    for (let i = 0; i < this.availableVendors.length; i++) {
+      if (this.availableVendors[i]._id === this.selectedVendor) {
+        vendor = this.availableVendors[i];
+      }
+    }
+    this.eventService.addVendor(this.event._id, vendor);
+    this.event = this.eventService.showEvent(this.event._id);
+    this.vendors = this.event.vendors;
+  }
+
+  addAssignment() {
+    let assignment: IAssignment = {
+      assignment: this.inputAssignment,
+      isFinished: false
+    };
+    console.log(assignment);
+    this.eventService.addAssignment(this.event._id, assignment);
+    this.event = this.eventService.showEvent(this.event._id);
+    this.assignments = this.event.assignments;
+  }
+
+  deletePanitia($event) {
+    this.eventService.deleteCommittee(this.event._id, $event);
+    this.event = this.eventService.showEvent(this.event._id);
+    this.committees = this.event.committees;
+  }
+
+  deleteVendor($event) {
+    this.eventService.deleteVendor(this.event._id, $event);
+    this.event = this.eventService.showEvent(this.event._id);
+    this.vendors = this.event.vendors;
+  }
+
+  deleteAssignment($event) {
+    this.eventService.deleteAssignment(this.event._id, $event);
+    this.event = this.eventService.showEvent(this.event._id);
+    this.assignments = this.event.assignments;
   }
 
   setAssignment($event) {

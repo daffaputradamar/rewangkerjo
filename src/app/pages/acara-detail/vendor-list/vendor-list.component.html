@@ -1,3 +1,6 @@
 <div *ngFor="let vendor of vendors" class="font-weight-bold">
-  <app-vendor-item [vendor]="vendor"></app-vendor-item>
+  <app-vendor-item
+    (deleteAVendor)="deleteAVendor($event)"
+    [vendor]="vendor"
+  ></app-vendor-item>
 </div>

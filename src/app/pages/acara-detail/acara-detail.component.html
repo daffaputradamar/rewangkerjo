@@ -15,7 +15,7 @@
     <div class="row">
       <select
         class="form-control col-sm-12 col-md-8"
-        [(ngModel)]="selectedOption"
+        [(ngModel)]="selectedEmployee"
       >
         <option *ngFor="let employee of employees" [value]="employee._id">
           {{ employee.name }}
@@ -33,25 +33,77 @@
     <p>Panitia kosong</p>
   </ng-container>
   <ng-template #committeesIsFound>
-    <app-panitia-list [committees]="committees"></app-panitia-list>
+    <app-panitia-list
+      (deletePanitia)="deletePanitia($event)"
+      [committees]="committees"
+    ></app-panitia-list>
   </ng-template>
 
-  <h4 class="font-weight-bolder mt-4">Vendor</h4>
+  <div class="row mt-5">
+    <div class="col-6 text-left">
+      <h4 class="font-weight-bolder">Vendor</h4>
+    </div>
+    <div class="col-6 text-right">
+      <fa-icon [icon]="faEdit" (click)="setEditVendor()"></fa-icon>
+    </div>
+  </div>
+  <div class="mt-3" *ngIf="editVendor">
+    <div class="row">
+      <select
+        class="form-control col-sm-12 col-md-8"
+        [(ngModel)]="selectedVendor"
+      >
+        <option *ngFor="let vendor of availableVendors" [value]="vendor._id">
+          {{ vendor.name }}
+        </option>
+      </select>
+      <div class="col-sm-12 col-md-4">
+        <button class="btn btn-block btn-purple" (click)="addVendor()">
+          Tambah
+        </button>
+      </div>
+    </div>
+  </div>
   <hr class="mb-3" />
   <ng-container *ngIf="!vendors; else vendorIsFound">
     <p>Vendor kosong</p>
   </ng-container>
   <ng-template #vendorIsFound>
-    <app-vendor-list [vendors]="vendors"></app-vendor-list>
+    <app-vendor-list
+      (deleteVendor)="deleteVendor($event)"
+      [vendors]="vendors"
+    ></app-vendor-list>
   </ng-template>
 
-  <h4 class="font-weight-bolder mt-4">Penugasan</h4>
+  <div class="row mt-5">
+    <div class="col-6 text-left">
+      <h4 class="font-weight-bolder">Penugasan</h4>
+    </div>
+    <div class="col-6 text-right">
+      <fa-icon [icon]="faEdit" (click)="setEditAssignment()"></fa-icon>
+    </div>
+  </div>
+  <div class="mt-3" *ngIf="editAssignment">
+    <div class="row">
+      <input
+        type="text"
+        class="form-control col-sm-12 col-md-8"
+        [(ngModel)]="inputAssignment"
+      />
+      <div class="col-sm-12 col-md-4">
+        <button class="btn btn-block btn-purple" (click)="addAssignment()">
+          Tambah
+        </button>
+      </div>
+    </div>
+  </div>
   <hr class="mb-3" />
   <ng-container *ngIf="!assignments; else assignmentIsFound">
     <p>Tidak ada penugasan</p>
   </ng-container>
   <ng-template #assignmentIsFound>
     <app-penugasan-list
+      (deleteAssignment)="deleteAssignment($event)"
       (setAssignment)="setAssignment($event)"
       [assignments]="assignments"
     ></app-penugasan-list>

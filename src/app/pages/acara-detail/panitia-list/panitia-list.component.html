@@ -20,6 +20,9 @@
     </span>
   </div>
   <div class="col-sm-4 col-md-3" *ngFor="let committee of committees">
-    <app-panitia-item [employee]="committee"></app-panitia-item>
+    <app-panitia-item
+      (deleteAPanitia)="deleteAPanitia($event)"
+      [employee]="committee"
+    ></app-panitia-item>
   </div>
 </div>

@@ -1,5 +1,6 @@
 <div *ngFor="let assignment of assignments">
   <app-penugasan-item
+    (deleteAnAssignment)="deleteAnAssignment($event)"
     (setAssignmentStatus)="setAssignmentStatus($event)"
     [assignment]="assignment"
   ></app-penugasan-item>

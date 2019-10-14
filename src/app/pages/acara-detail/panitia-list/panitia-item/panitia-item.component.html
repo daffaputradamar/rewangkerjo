@@ -6,4 +6,17 @@
   }"
 >
   {{ employee.name }}
+
+  <span
+    class="pl-4"
+    role="button"
+    id="dropdownDeletePanitia"
+    data-toggle="dropdown"
+    aria-haspopup="true"
+    aria-expanded="false"
+    ><fa-icon [icon]="faEllipsisV"></fa-icon>
+    <div class="dropdown-menu" aria-labelledby="dropdownDeletePanitia">
+      <a class="dropdown-item" (click)="deletePanitia()">Delete</a>
+    </div>
+  </span>
 </p>
