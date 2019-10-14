@@ -44,4 +44,8 @@ export class EmployeeService {
   public getEmployees(): IEmployee[] {
     return this.employees;
   }
+
+  public addEmployee(employee: IEmployee) {
+    this.employees.push(employee);
+  }
 }

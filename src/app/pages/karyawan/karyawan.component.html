@@ -7,6 +7,80 @@
         (setSelectedEmployees)="setSelectedEmployees($event)"
       >
       </app-karyawan-categories>
+      <hr />
+      <div class="mb-3">
+        <button
+          class="btn btn-block rounded btn-outline-purple font-weight-bold"
+          (click)="setEditStatus()"
+        >
+          Tambah Karyawan
+        </button>
+      </div>
+      <div *ngIf="editStatus">
+        <div class="form-group">
+          <label class="font-weight-bold" for="namaInput">Nama</label>
+          <input
+            id="namaInput"
+            type="text"
+            class="form-control form-control-sm"
+            [(ngModel)]="inputName"
+          />
+        </div>
+        <div class="form-group">
+          <label class="font-weight-bold" for="phoneInput">No Telp</label>
+          <input
+            id="phoneInput"
+            type="text"
+            class="form-control form-control-sm"
+            [(ngModel)]="inputPhone"
+          />
+        </div>
+        <div class="form-group">
+          <label class="font-weight-bold" for="addressInput">Alamat</label>
+          <input
+            id="addressInput"
+            type="text"
+            class="form-control form-control-sm"
+            [(ngModel)]="inputAddress"
+          />
+        </div>
+        <div class="form-group">
+          <label for="positionSelect">Posisi</label>
+          <select
+            class="form-control"
+            id="positionSelect"
+            [(ngModel)]="selectedPosition"
+          >
+            <option
+              *ngFor="let position of employeePosition"
+              [value]="position.position"
+            >
+              {{ position.name }}
+            </option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="font-weight-bold" for="usernameInput">Username</label>
+          <input
+            id="usernameInput"
+            type="text"
+            class="form-control form-control-sm"
+            [(ngModel)]="inputUsername"
+          />
+        </div>
+        <div class="form-group">
+          <label class="font-weight-bold" for="passwordInput">Password</label>
+          <input
+            id="passwordInput"
+            type="password"
+            class="form-control form-control-sm"
+            [(ngModel)]="inputPassword"
+          />
+        </div>
+        <div class="text-right">
+          <button class="btn btn-purple" (click)="addEmployee()">Tambah</button>
+        </div>
+      </div>
     </div>
     <div class="col-md-9 col-sm-12">
       <div *ngIf="employeePosition[0].isSelected">

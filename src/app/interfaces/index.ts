@@ -42,6 +42,7 @@ export interface IEmployee {
   address: string;
   phone: string;
   position: number;
+  password?: string;
 }
 
 export interface IVendor {
