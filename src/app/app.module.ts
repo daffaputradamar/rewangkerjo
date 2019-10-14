@@ -25,6 +25,9 @@ import { VendorItemComponent } from "./pages/acara-detail/vendor-list/vendor-ite
 import { PenugasanItemComponent } from "./pages/acara-detail/penugasan-list/penugasan-item/penugasan-item.component";
 import { EmployeeComponent } from "./components/buttons/employee/employee.component";
 import { DokumenItemComponent } from "./pages/acara-detail/dokumen-list/dokumen-item/dokumen-item.component";
+import { KaryawanComponent } from './pages/karyawan/karyawan.component';
+import { KaryawanListComponent } from './pages/karyawan/karyawan-list/karyawan-list.component';
+import { KaryawanCategoriesComponent } from './pages/karyawan/karyawan-categories/karyawan-categories.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +50,10 @@ import { DokumenItemComponent } from "./pages/acara-detail/dokumen-list/dokumen-
     VendorItemComponent,
     PenugasanItemComponent,
     EmployeeComponent,
-    DokumenItemComponent
+    DokumenItemComponent,
+    KaryawanComponent,
+    KaryawanListComponent,
+    KaryawanCategoriesComponent
   ],
   imports: [
     BrowserModule,

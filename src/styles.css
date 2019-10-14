@@ -11,6 +11,10 @@ body {
   background-size: cover;
 }
 
+.text-bg {
+  font-size: 1.5rem;
+}
+
 .disable-decoration {
   text-decoration: none !important;
 }
