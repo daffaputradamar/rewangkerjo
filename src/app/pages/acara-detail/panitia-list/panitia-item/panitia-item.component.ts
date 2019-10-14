@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from "@angular/core";
 import { IEmployee } from "src/app/interfaces";
+import { crew, staff } from "../../../../../assets/color";
 
 @Component({
   selector: "app-panitia-item",
@@ -7,9 +8,13 @@ import { IEmployee } from "src/app/interfaces";
   styleUrls: ["./panitia-item.component.css"]
 })
 export class PanitiaItemComponent implements OnInit {
-  @Input() employees: IEmployee[];
+  @Input() employee: IEmployee[];
+  colorCrew = crew;
+  colorStaff = staff;
 
   constructor() {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    console.log(this.employee);
+  }
 }

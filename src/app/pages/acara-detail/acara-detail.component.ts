@@ -10,6 +10,8 @@ import {
 import { formatDate } from "../../../assets/util/formatDate";
 import { ActivatedRoute } from "@angular/router";
 import { EventService } from "src/app/services/event.service";
+import { faEdit } from "@fortawesome/free-solid-svg-icons";
+import { EmployeeService } from "src/app/services/employee.service";
 
 @Component({
   selector: "app-acara-detail",
@@ -24,10 +26,16 @@ export class AcaraDetailComponent implements OnInit {
   vendors: IVendor[];
   assignments: IAssignment[];
   documents: IDocument[];
+  employees: IEmployee[];
+  faEdit = faEdit;
+  selectedOption: string;
+
+  editPanitia = false;
 
   constructor(
     private activatedRoute: ActivatedRoute,
-    private eventService: EventService
+    private eventService: EventService,
+    private employeeService: EmployeeService
   ) {}
 
   ngOnInit() {
@@ -35,11 +43,31 @@ export class AcaraDetailComponent implements OnInit {
       params => (this.id = params.get("id"))
     );
     this.event = this.eventService.showEvent(this.id);
+    this.employees = this.employeeService.getEmployees();
     this.formattedDate = formatDate(this.event.createdAt);
     this.committees = this.event.committees;
     this.vendors = this.event.vendors;
     this.assignments = this.event.assignments;
     this.documents = this.event.documents;
+
+    this.selectedOption = "1";
+  }
+
+  setEditPanitia() {
+    this.editPanitia = !this.editPanitia;
+    console.log(this.editPanitia);
+  }
+
+  addPanitia() {
+    let committee: IEmployee;
+    for (let i = 0; i < this.employees.length; i++) {
+      if (this.employees[i]._id === this.selectedOption) {
+        committee = this.employees[i];
+      }
+    }
+    this.eventService.addCommittee(this.event._id, committee);
+    this.event = this.eventService.showEvent(this.event._id);
+    this.committees = this.event.committees;
   }
 
   setAssignment($event) {

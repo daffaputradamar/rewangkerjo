@@ -2,7 +2,7 @@ import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
 import { HttpClientModule } from "@angular/common/http";
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
-import { ReactiveFormsModule } from "@angular/forms";
+import { ReactiveFormsModule, FormsModule } from "@angular/forms";
 
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
@@ -24,7 +24,7 @@ import { PanitiaItemComponent } from "./pages/acara-detail/panitia-list/panitia-
 import { VendorItemComponent } from "./pages/acara-detail/vendor-list/vendor-item/vendor-item.component";
 import { PenugasanItemComponent } from "./pages/acara-detail/penugasan-list/penugasan-item/penugasan-item.component";
 import { EmployeeComponent } from "./components/buttons/employee/employee.component";
-import { DokumenItemComponent } from './pages/acara-detail/dokumen-list/dokumen-item/dokumen-item.component';
+import { DokumenItemComponent } from "./pages/acara-detail/dokumen-list/dokumen-item/dokumen-item.component";
 
 @NgModule({
   declarations: [
@@ -54,6 +54,7 @@ import { DokumenItemComponent } from './pages/acara-detail/dokumen-list/dokumen-
     AppRoutingModule,
     HttpClientModule,
     FontAwesomeModule,
+    FormsModule,
     ReactiveFormsModule
   ],
   providers: [],

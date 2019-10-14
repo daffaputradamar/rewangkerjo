@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { IEvent } from "../interfaces";
+import { IEvent, IEmployee } from "../interfaces";
 
 @Injectable({
   providedIn: "root"
@@ -239,6 +239,15 @@ export class EventService {
       }
     }
     return null;
+  }
+
+  public addCommittee(id: string, employee: IEmployee) {
+    for (let i = 0; i < this.events.length; i++) {
+      if (this.events[i]._id === id) {
+        this.events[i].committees.push(employee);
+        break;
+      }
+    }
   }
 
   public updateAnEvent(id: string, event: IEvent) {

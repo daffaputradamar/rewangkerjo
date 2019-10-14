@@ -3,7 +3,31 @@
     [event]="event"
     [date]="formattedDate"
   ></app-acara-deskripsi>
-  <h4 class="font-weight-bolder mt-5">Panitia</h4>
+  <div class="row mt-5">
+    <div class="col-6 text-left">
+      <h4 class="font-weight-bolder">Panitia</h4>
+    </div>
+    <div class="col-6 text-right">
+      <fa-icon [icon]="faEdit" (click)="setEditPanitia()"></fa-icon>
+    </div>
+  </div>
+  <div class="mt-3" *ngIf="editPanitia">
+    <div class="row">
+      <select
+        class="form-control col-sm-12 col-md-8"
+        [(ngModel)]="selectedOption"
+      >
+        <option *ngFor="let employee of employees" [value]="employee._id">
+          {{ employee.name }}
+        </option>
+      </select>
+      <div class="col-sm-12 col-md-4">
+        <button class="btn btn-block btn-purple" (click)="addPanitia()">
+          Tambah
+        </button>
+      </div>
+    </div>
+  </div>
   <hr class="mb-3" />
   <ng-container *ngIf="!committees; else committeesIsFound">
     <p>Panitia kosong</p>

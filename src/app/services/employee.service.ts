@@ -40,4 +40,8 @@ export class EmployeeService {
     }
   ];
   constructor() {}
+
+  public getEmployees(): IEmployee[] {
+    return this.employees;
+  }
 }

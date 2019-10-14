@@ -1,3 +1,9 @@
-<p *ngFor="let employee of employees" class="font-weight-bolder">
+<p
+  class="font-weight-bolder"
+  [ngStyle]="{
+    color: employee.position === 1 ? colorStaff : colorCrew,
+    'font-size': '1.3rem'
+  }"
+>
   {{ employee.name }}
 </p>

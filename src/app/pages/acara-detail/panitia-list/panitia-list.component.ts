@@ -9,16 +9,10 @@ import { crew, staff } from "../../../../assets/color";
 })
 export class PanitiaListComponent implements OnInit {
   @Input() committees: IEmployee[];
-  crew: IEmployee[];
-  staff: IEmployee[];
-
   colorCrew = crew;
   colorStaff = staff;
 
   constructor() {}
 
-  ngOnInit() {
-    this.staff = this.committees.filter(committee => committee.position === 1);
-    this.crew = this.committees.filter(committee => committee.position === 2);
-  }
+  ngOnInit() {}
 }
