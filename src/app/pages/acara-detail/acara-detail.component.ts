@@ -26,7 +26,7 @@ export class AcaraDetailComponent implements OnInit {
   committees: IEmployee[];
   vendors: IVendor[];
   assignments: IAssignment[];
-  documents: IDocument[];
+  // documents: IDocument[];
   employees: IEmployee[];
   availableVendors: IVendor[];
   faEdit = faEdit;
@@ -55,7 +55,7 @@ export class AcaraDetailComponent implements OnInit {
     this.committees = this.event.committees;
     this.vendors = this.event.vendors;
     this.assignments = this.event.assignments;
-    this.documents = this.event.documents;
+    // this.documents = this.event.documents;
 
     this.employees = this.employeeService.getEmployees();
     this.availableVendors = this.vendorService.getVendors();
