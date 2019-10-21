@@ -33,41 +33,43 @@ export class KaryawanDetailComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.activatedRoute.paramMap.subscribe(
-      params => (this.id = params.get("id"))
-    );
-    this.employee = this.employeeService.showEmployee(this.id);
-    this.inputName = this.employee.name;
-    this.inputAddress = this.employee.address;
-    this.inputPhone = this.employee.phone;
-    this.inputUsername = this.employee.username;
+    this.activatedRoute.paramMap.subscribe(params => {
+      this.id = params.get("id");
+      this.employeeService.showEmployee(this.id).subscribe(employee => {
+        this.employee = employee;
+        this.inputName = this.employee.name;
+        this.inputAddress = this.employee.address;
+        this.inputPhone = this.employee.phone;
+        this.inputUsername = this.employee.username;
+      });
+    });
   }
 
   setEditStatus() {
     this.editStatus = !this.editStatus;
   }
 
-  editEmployee() {
-    const employee: IEmployee = {
-      _id: this.employee._id,
-      password: this.employee.password,
-      position: this.employee.position,
-      address: this.inputAddress,
-      name: this.inputName,
-      phone: this.inputPhone,
-      username: this.inputUsername
-    };
-    console.log(employee);
-    this.employeeService.editEmployee(this.employee._id, employee);
-    this.employee = this.employeeService.showEmployee(this.id);
-    this.setEditStatus();
-    this.resetForm();
-  }
+  // editEmployee() {
+  //   const employee: IEmployee = {
+  //     _id: this.employee._id,
+  //     password: this.employee.password,
+  //     position: this.employee.position,
+  //     address: this.inputAddress,
+  //     name: this.inputName,
+  //     phone: this.inputPhone,
+  //     username: this.inputUsername
+  //   };
+  //   console.log(employee);
+  //   this.employeeService.editEmployee(this.employee._id, employee);
+  //   this.employee = this.employeeService.showEmployee(this.id);
+  //   this.setEditStatus();
+  //   this.resetForm();
+  // }
 
-  deleteEmployee() {
-    this.employeeService.deleteEmployee(this.employee._id);
-    this.router.navigate(["karyawan"]);
-  }
+  // deleteEmployee() {
+  //   this.employeeService.deleteEmployee(this.employee._id);
+  //   this.router.navigate(["karyawan"]);
+  // }
 
   resetForm() {
     this.inputName = this.employee.name;

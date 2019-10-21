@@ -1,5 +1,6 @@
 import { Component, OnInit, OnChanges } from "@angular/core";
 import { AuthService } from "src/app/services/auth.service";
+import { faBars } from "@fortawesome/free-solid-svg-icons";
 
 @Component({
   selector: "app-navbar",
@@ -8,12 +9,12 @@ import { AuthService } from "src/app/services/auth.service";
 })
 export class NavbarComponent implements OnInit {
   isLoggedIn: boolean;
+  faBars = faBars;
 
   constructor(private authService: AuthService) {}
 
   ngOnInit() {
-    this.isLoggedIn = true;
-    this.authService.loginStatusUpdate.subscribe(status => {
+    this.authService.getLoginStatus().subscribe(status => {
       this.isLoggedIn = status;
     });
   }

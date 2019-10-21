@@ -47,22 +47,25 @@ export class AcaraDetailComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.activatedRoute.paramMap.subscribe(
-      params => (this.id = params.get("id"))
-    );
-    this.event = this.eventService.showEvent(this.id);
-    this.formattedDate = formatDate(this.event.createdAt);
-    this.committees = this.event.committees;
-    this.vendors = this.event.vendors;
-    this.assignments = this.event.assignments;
-    // this.documents = this.event.documents;
+    this.activatedRoute.paramMap.subscribe(params => {
+      this.id = params.get("id");
+      this.eventService.showEvent(this.id).subscribe(event => {
+        this.event = event;
+        console.log(this.event);
+        this.formattedDate = formatDate(this.event.createdAt);
+        this.committees = this.event.committees;
+        this.vendors = this.event.vendors;
+        this.assignments = this.event.assignments;
 
-    this.employees = this.employeeService.getEmployees();
-    this.availableVendors = this.vendorService.getVendors();
-
-    this.selectedEmployee = "1";
-    this.selectedVendor = "1";
-    this.inputAssignment = "";
+        this.employeeService.getEmployees().subscribe(employees => {
+          this.employees = employees;
+          this.vendorService.getVendors().subscribe(vendors => {
+            this.availableVendors = vendors;
+          });
+        });
+        this.inputAssignment = "";
+      });
+    });
   }
 
   setEditPanitia() {
@@ -77,75 +80,75 @@ export class AcaraDetailComponent implements OnInit {
     this.editAssignment = !this.editAssignment;
   }
 
-  addPanitia() {
-    let committee: IEmployee;
-    for (let i = 0; i < this.employees.length; i++) {
-      if (this.employees[i]._id === this.selectedEmployee) {
-        committee = this.employees[i];
-      }
-    }
-    this.eventService.addCommittee(this.event._id, committee);
-    this.event = this.eventService.showEvent(this.event._id);
-    this.committees = this.event.committees;
-  }
+  // addPanitia() {
+  //   let committee: IEmployee;
+  //   for (let i = 0; i < this.employees.length; i++) {
+  //     if (this.employees[i]._id === this.selectedEmployee) {
+  //       committee = this.employees[i];
+  //     }
+  //   }
+  //   this.eventService.addCommittee(this.event._id, committee);
+  //   this.event = this.eventService.showEvent(this.event._id);
+  //   this.committees = this.event.committees;
+  // }
 
-  addVendor() {
-    let vendor: IVendor;
-    for (let i = 0; i < this.availableVendors.length; i++) {
-      if (this.availableVendors[i]._id === this.selectedVendor) {
-        vendor = this.availableVendors[i];
-      }
-    }
-    this.eventService.addVendor(this.event._id, vendor);
-    this.event = this.eventService.showEvent(this.event._id);
-    this.vendors = this.event.vendors;
-  }
+  // addVendor() {
+  //   let vendor: IVendor;
+  //   for (let i = 0; i < this.availableVendors.length; i++) {
+  //     if (this.availableVendors[i]._id === this.selectedVendor) {
+  //       vendor = this.availableVendors[i];
+  //     }
+  //   }
+  //   this.eventService.addVendor(this.event._id, vendor);
+  //   this.event = this.eventService.showEvent(this.event._id);
+  //   this.vendors = this.event.vendors;
+  // }
 
-  addAssignment() {
-    let assignment: IAssignment = {
-      assignment: this.inputAssignment,
-      isFinished: false
-    };
-    console.log(assignment);
-    this.eventService.addAssignment(this.event._id, assignment);
-    this.event = this.eventService.showEvent(this.event._id);
-    this.assignments = this.event.assignments;
-  }
+  // addAssignment() {
+  //   let assignment: IAssignment = {
+  //     assignment: this.inputAssignment,
+  //     isFinished: false
+  //   };
+  //   console.log(assignment);
+  //   this.eventService.addAssignment(this.event._id, assignment);
+  //   this.event = this.eventService.showEvent(this.event._id);
+  //   this.assignments = this.event.assignments;
+  // }
 
-  deletePanitia($event) {
-    this.eventService.deleteCommittee(this.event._id, $event);
-    this.event = this.eventService.showEvent(this.event._id);
-    this.committees = this.event.committees;
-  }
+  // deletePanitia($event) {
+  //   this.eventService.deleteCommittee(this.event._id, $event);
+  //   this.event = this.eventService.showEvent(this.event._id);
+  //   this.committees = this.event.committees;
+  // }
 
-  deleteVendor($event) {
-    this.eventService.deleteVendor(this.event._id, $event);
-    this.event = this.eventService.showEvent(this.event._id);
-    this.vendors = this.event.vendors;
-  }
+  // deleteVendor($event) {
+  //   this.eventService.deleteVendor(this.event._id, $event);
+  //   this.event = this.eventService.showEvent(this.event._id);
+  //   this.vendors = this.event.vendors;
+  // }
 
-  deleteAssignment($event) {
-    this.eventService.deleteAssignment(this.event._id, $event);
-    this.event = this.eventService.showEvent(this.event._id);
-    this.assignments = this.event.assignments;
-  }
+  // deleteAssignment($event) {
+  //   this.eventService.deleteAssignment(this.event._id, $event);
+  //   this.event = this.eventService.showEvent(this.event._id);
+  //   this.assignments = this.event.assignments;
+  // }
 
-  setAssignment($event) {
-    let event = this.event;
-    for (let i = 0; i < event.assignments.length; i++) {
-      if (event.assignments[i].assignment === $event) {
-        event.assignments[i].isFinished = !event.assignments[i].isFinished;
-        break;
-      }
-    }
-    this.updateAnEvent(event);
-  }
+  // setAssignment($event) {
+  //   let event = this.event;
+  //   for (let i = 0; i < event.assignments.length; i++) {
+  //     if (event.assignments[i].assignment === $event) {
+  //       event.assignments[i].isFinished = !event.assignments[i].isFinished;
+  //       break;
+  //     }
+  //   }
+  //   this.updateAnEvent(event);
+  // }
 
-  updateAnEvent(event: IEvent) {
-    this.eventService.updateAnEvent(this.event._id, event);
-  }
+  // updateAnEvent(event: IEvent) {
+  //   this.eventService.updateAnEvent(this.event._id, event);
+  // }
 
-  markAsFinished() {
-    this.eventService.markAsFinished(this.event._id);
-  }
+  // markAsFinished() {
+  //   this.eventService.markAsFinished(this.event._id);
+  // }
 }

@@ -1,4 +1,5 @@
 export function formatDate(date): string {
+  const newDate = new Date(date);
   const monthNames = [
     "Januari",
     "Februari",
@@ -14,9 +15,9 @@ export function formatDate(date): string {
     "Desember"
   ];
 
-  const day = date.getDate();
-  const monthIndex = date.getMonth();
-  const year = date.getFullYear();
+  const day = newDate.getDate();
+  const monthIndex = newDate.getMonth();
+  const year = newDate.getFullYear();
 
   return day + " " + monthNames[monthIndex] + " " + year;
 }

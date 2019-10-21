@@ -14,7 +14,6 @@ export interface IEvent {
   category: ICategory;
   committees?: IEmployee[];
   vendors?: IVendor[];
-  documents?: IDocument[];
   isFinished: boolean;
   assignments?: IAssignment[];
   createdAt: Date;
@@ -49,4 +48,13 @@ export interface IVendor {
   _id: string;
   name: string;
   phone: string;
+}
+
+export interface IUser {
+  username: string;
+  password: string;
+}
+
+export interface IToken {
+  token: string;
 }

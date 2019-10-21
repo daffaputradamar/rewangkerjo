@@ -7,15 +7,24 @@
       Buat Acara
     </button>
   </div>
-  <h4 class="font-weight-bolder mb-4">Kategori</h4>
-  <app-categories
-    (setCategorySelected)="setCategorySelected($event)"
-    [categories]="categories"
-  ></app-categories>
-  <h4 class="font-weight-bolder mt-5">Acara Saat Ini</h4>
-  <hr class="mb-4" />
-  <app-events [events]="eventsOngoing"></app-events>
-  <h4 class="font-weight-bolder mt-5">Riwayat Acara</h4>
-  <hr class="mb-4" />
-  <app-events [events]="eventsFinished"></app-events>
+  <div *ngIf="loading; else loadingCompleted">
+    <div class="d-flex justify-content-center">
+      <div class="spinner-border spinner-border-lg" role="status">
+        <span class="sr-only">Loading...</span>
+      </div>
+    </div>
+  </div>
+  <ng-template #loadingCompleted>
+    <h4 class="font-weight-bolder mb-4">Kategori</h4>
+    <app-categories
+      (setCategorySelected)="setCategorySelected($event)"
+      [categories]="categories"
+    ></app-categories>
+    <h4 class="font-weight-bolder mt-5">Acara Saat Ini</h4>
+    <hr class="mb-4" />
+    <app-events [events]="eventsOngoing"></app-events>
+    <h4 class="font-weight-bolder mt-5">Riwayat Acara</h4>
+    <hr class="mb-4" />
+    <app-events [events]="eventsFinished"></app-events>
+  </ng-template>
 </div>

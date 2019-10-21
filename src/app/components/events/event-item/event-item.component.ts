@@ -15,6 +15,7 @@ export class EventItemComponent implements OnInit, OnChanges {
   formattedDate: string;
 
   ngOnChanges() {
+    console.log(this.event.createdAt);
     this.formattedDate = formatDate(this.event.createdAt);
   }
 

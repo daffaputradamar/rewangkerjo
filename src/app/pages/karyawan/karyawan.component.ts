@@ -43,19 +43,21 @@ export class KaryawanComponent implements OnInit {
   constructor(private employeeService: EmployeeService) {}
 
   ngOnInit() {
-    this.employees = this.employeeService.getEmployees();
-    this.employeeStaff = this.getEmployeeStaff();
-    this.employeesCrew = this.getEmployeeCrew();
+    this.employeeService.getEmployees().subscribe(employees => {
+      this.employees = employees;
+      this.employeeStaff = this.getEmployeeStaff();
+      this.employeesCrew = this.getEmployeeCrew();
 
-    this.inputSearchKru = "";
-    this.inputSearchStaf = "";
+      this.inputSearchKru = "";
+      this.inputSearchStaf = "";
 
-    this.inputName = "";
-    this.inputPhone = "";
-    this.inputAddress = "";
-    this.inputUsername = "";
-    this.inputPassword = "";
-    this.selectedPosition = "2";
+      this.inputName = "";
+      this.inputPhone = "";
+      this.inputAddress = "";
+      this.inputUsername = "";
+      this.inputPassword = "";
+      this.selectedPosition = "2";
+    });
   }
 
   setEditStatus() {
@@ -121,23 +123,23 @@ export class KaryawanComponent implements OnInit {
     });
   }
 
-  addEmployee() {
-    let newKaryawan: IEmployee = {
-      _id: "5",
-      address: this.inputAddress,
-      name: this.inputName,
-      phone: this.inputPhone,
-      username: this.inputUsername,
-      password: this.inputPassword,
-      position: Number(this.selectedPosition)
-    };
-    this.employeeService.addEmployee(newKaryawan);
-    this.employees = this.employeeService.getEmployees();
-    this.employeeStaff = this.getEmployeeStaff();
-    this.employeesCrew = this.getEmployeeCrew();
-    this.resetForm();
-    this.setEditStatus();
-  }
+  // addEmployee() {
+  //   let newKaryawan: IEmployee = {
+  //     _id: "5",
+  //     address: this.inputAddress,
+  //     name: this.inputName,
+  //     phone: this.inputPhone,
+  //     username: this.inputUsername,
+  //     password: this.inputPassword,
+  //     position: Number(this.selectedPosition)
+  //   };
+  //   this.employeeService.addEmployee(newKaryawan);
+  //   this.employees = this.employeeService.getEmployees();
+  //   this.employeeStaff = this.getEmployeeStaff();
+  //   this.employeesCrew = this.getEmployeeCrew();
+  //   this.resetForm();
+  //   this.setEditStatus();
+  // }
 
   resetForm() {
     this.inputName = "";

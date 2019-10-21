@@ -1,5 +1,14 @@
 import { Injectable } from "@angular/core";
 import { IEvent, IEmployee, IVendor, IAssignment } from "../interfaces";
+import { environment } from "src/environments/environment";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { Observable } from "rxjs";
+
+const httpOptions = {
+  headers: new HttpHeaders({
+    "Content-Type": "application/json"
+  })
+};
 
 @Injectable({
   providedIn: "root"
@@ -89,16 +98,7 @@ export class EventService {
           isFinished: false
         }
       ],
-      documents: [
-        {
-          path: "https://via.placeholder.com/300",
-          deskripsi: "Layout acara"
-        },
-        {
-          path: "https://via.placeholder.com/300",
-          deskripsi: "Foto tempat"
-        }
-      ],
+
       committees: [
         {
           _id: "1",
@@ -175,16 +175,7 @@ export class EventService {
           isFinished: false
         }
       ],
-      documents: [
-        {
-          path: "https://via.placeholder.com/300",
-          deskripsi: "Layout acara"
-        },
-        {
-          path: "https://via.placeholder.com/300",
-          deskripsi: "Foto tempat"
-        }
-      ],
+
       committees: [
         {
           _id: "1",
@@ -223,21 +214,17 @@ export class EventService {
       createdAt: new Date()
     }
   ];
-  constructor() {}
 
-  public getEvents(): IEvent[] {
-    return this.events;
+  apiUrl = environment.apiUrl;
+
+  constructor(private http: HttpClient) {}
+
+  public getEvents(): Observable<IEvent[]> {
+    return this.http.get<IEvent[]>(`${this.apiUrl}/event`);
   }
 
-  public showEvent(id: string): IEvent | null {
-    let event: IEvent;
-    for (let i = 0; i < this.events.length; i++) {
-      if (this.events[i]._id === id) {
-        event = this.events[i];
-        return event;
-      }
-    }
-    return null;
+  public showEvent(id: string): Observable<IEvent> {
+    return this.http.get<IEvent>(`${this.apiUrl}/event/${id}`);
   }
 
   public markAsFinished(id: string) {

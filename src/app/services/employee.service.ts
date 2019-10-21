@@ -1,5 +1,8 @@
 import { Injectable } from "@angular/core";
 import { IEmployee } from "../interfaces";
+import { HttpClient } from "@angular/common/http";
+import { environment } from "src/environments/environment";
+import { Observable } from "rxjs";
 
 @Injectable({
   providedIn: "root"
@@ -39,19 +42,16 @@ export class EmployeeService {
       username: "robertuswanda"
     }
   ];
-  constructor() {}
+  constructor(private http: HttpClient) {}
 
-  public getEmployees(): IEmployee[] {
-    return this.employees;
+  apiUrl = environment.apiUrl;
+
+  public getEmployees(): Observable<IEmployee[]> {
+    return this.http.get<IEmployee[]>(`${this.apiUrl}/employee`);
   }
 
-  public showEmployee(id: string): IEmployee {
-    for (let i = 0; i < this.employees.length; i++) {
-      if (this.employees[i]._id === id) {
-        return this.employees[i];
-      }
-    }
-    return null;
+  public showEmployee(id: string): Observable<IEmployee> {
+    return this.http.get<IEmployee>(`${this.apiUrl}/employee/${id}`);
   }
 
   public addEmployee(employee: IEmployee) {

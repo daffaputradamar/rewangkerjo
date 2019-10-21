@@ -1,6 +1,9 @@
 import { Injectable } from "@angular/core";
 
 import { ICategory } from "../interfaces";
+import { Observable } from "rxjs";
+import { HttpClient } from "@angular/common/http";
+import { environment } from "src/environments/environment";
 
 @Injectable({
   providedIn: "root"
@@ -19,9 +22,11 @@ export class CategoryService {
     }
   ];
 
-  constructor() {}
+  apiUrl = environment.apiUrl;
 
-  public getCategories(): ICategory[] {
-    return this.categories;
+  constructor(private http: HttpClient) {}
+
+  public getCategories(): Observable<ICategory[]> {
+    return this.http.get<ICategory[]>(`${this.apiUrl}/category`);
   }
 }

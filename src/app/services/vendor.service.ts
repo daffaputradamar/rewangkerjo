@@ -1,5 +1,8 @@
 import { Injectable } from "@angular/core";
 import { IVendor } from "../interfaces";
+import { environment } from "src/environments/environment";
+import { Observable } from "rxjs";
+import { HttpClient } from "@angular/common/http";
 
 @Injectable({
   providedIn: "root"
@@ -28,9 +31,10 @@ export class VendorService {
     }
   ];
 
-  constructor() {}
+  constructor(private http: HttpClient) {}
+  apiUrl = environment.apiUrl;
 
-  public getVendors(): IVendor[] {
-    return this.vendors;
+  public getVendors(): Observable<IVendor[]> {
+    return this.http.get<IVendor[]>(`${this.apiUrl}/vendor`);
   }
 }

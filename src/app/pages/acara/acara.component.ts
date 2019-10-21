@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { CategoryService } from "src/app/services/category.service";
 import { ICategory, IEvent } from "src/app/interfaces";
 import { EventService } from "src/app/services/event.service";
+import { Observable } from "rxjs";
 
 @Component({
   selector: "app-acara",
@@ -11,6 +12,7 @@ import { EventService } from "src/app/services/event.service";
 export class AcaraComponent implements OnInit {
   categories: ICategory[];
   events: IEvent[];
+  loading = false;
 
   eventsOngoing: IEvent[];
   eventsFinished: IEvent[];
@@ -21,12 +23,18 @@ export class AcaraComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    const categoriesTemp = this.categoryService.getCategories();
-    categoriesTemp.forEach(cat => (cat.isSelected = true));
-    this.categories = categoriesTemp;
-    this.events = this.eventService.getEvents();
-    this.getFinishedEvent();
-    this.getUnfinishedEvent();
+    this.loading = true;
+    this.categoryService.getCategories().subscribe(categories => {
+      const _categoriesTemp = categories;
+      _categoriesTemp.forEach(cat => (cat.isSelected = true));
+      this.categories = _categoriesTemp;
+      this.eventService.getEvents().subscribe(events => {
+        this.events = events;
+        this.getFinishedEvent();
+        this.getUnfinishedEvent();
+        this.loading = false;
+      });
+    });
   }
 
   getSelectedCategory(): IEvent[] {

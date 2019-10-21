@@ -32,10 +32,13 @@ export class BuatAcaraComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.categories = this.categoryService.getCategories();
-    this.employees = this.employeeService
-      .getEmployees()
-      .filter(employee => employee.position === 1);
+    this.categoryService.getCategories().subscribe(categories => {
+      this.categories = categories;
+      this.employeeService.getEmployees().subscribe(employees => {
+        this.employees = employees;
+        this.employees.filter(employee => employee.position === 1);
+      });
+    });
   }
 
   onSubmit() {
