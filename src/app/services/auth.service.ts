@@ -48,6 +48,7 @@ export class AuthService {
           this.jwt = token.token as string;
           localStorage.setItem("token", this.jwt);
           localStorage.setItem("user", JSON.stringify(decode(this.jwt).data));
+          this.setLoginStatus(true);
           this.router.navigate(["/acara"]);
         }
       });
