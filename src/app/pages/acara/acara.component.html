@@ -3,6 +3,7 @@
     <button
       class="btn btn-lg btn-block btn-outline-purple font-weight-bold"
       routerLink="/buat-acara"
+      *ngIf="user.position === 1"
     >
       Buat Acara
     </button>

@@ -4,7 +4,7 @@ import decode from "jwt-decode";
 
 import { HttpClient } from "@angular/common/http";
 import { Router } from "@angular/router";
-import { IUser, IToken } from "../interfaces";
+import { IUser, IToken, IAdmin, IEmployee } from "../interfaces";
 import { Observable, BehaviorSubject } from "rxjs";
 
 @Injectable({
@@ -16,8 +16,7 @@ export class AuthService {
   );
   isLoggedIn: boolean;
   apiUrl = environment.apiUrl;
-  private jwt: string;
-  loginStatusUpdate = new EventEmitter<boolean>();
+  public jwt: string;
 
   setLoginStatus(status: boolean) {
     this.loginStatus.next(localStorage.getItem("token") ? true : false);
@@ -25,6 +24,14 @@ export class AuthService {
 
   getLoginStatus(): Observable<boolean> {
     return this.loginStatus.asObservable();
+  }
+
+  getUser(): IAdmin | IEmployee {
+    return JSON.parse(localStorage.getItem("user"));
+  }
+
+  getToken() {
+    return localStorage.getItem("token");
   }
 
   constructor(private router: Router, private http: HttpClient) {}
@@ -37,15 +44,18 @@ export class AuthService {
         password: user.password
       })
       .subscribe(token => {
-        this.jwt = token.token as string;
-        localStorage.setItem("token", this.jwt);
-        localStorage.setItem("user", decode(this.jwt));
-        this.router.navigate(["/acara"]);
+        if (token.token) {
+          this.jwt = token.token as string;
+          localStorage.setItem("token", this.jwt);
+          localStorage.setItem("user", JSON.stringify(decode(this.jwt).data));
+          this.router.navigate(["/acara"]);
+        }
       });
   }
 
   public logout() {
     this.loginStatus.next(false);
+    this.jwt = "";
     localStorage.removeItem("token");
     localStorage.removeItem("user");
     this.router.navigate(["/"]);

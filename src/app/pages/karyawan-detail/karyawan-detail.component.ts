@@ -15,6 +15,7 @@ export class KaryawanDetailComponent implements OnInit {
   employee: IEmployee;
   id: string;
   editStatus = false;
+  loading = false;
 
   colorCrew = crew;
   colorStaff = staff;
@@ -33,14 +34,17 @@ export class KaryawanDetailComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.loading = true;
     this.activatedRoute.paramMap.subscribe(params => {
       this.id = params.get("id");
       this.employeeService.showEmployee(this.id).subscribe(employee => {
+        console.log(employee);
         this.employee = employee;
         this.inputName = this.employee.name;
         this.inputAddress = this.employee.address;
         this.inputPhone = this.employee.phone;
         this.inputUsername = this.employee.username;
+        this.loading = false;
       });
     });
   }

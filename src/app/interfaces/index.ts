@@ -6,7 +6,7 @@ export interface ICategory {
 }
 
 export interface IEvent {
-  _id: string;
+  _id?: string;
   client: string;
   addressEvent: string;
   phone: string;
@@ -14,9 +14,9 @@ export interface IEvent {
   category: ICategory;
   committees?: IEmployee[];
   vendors?: IVendor[];
-  isFinished: boolean;
+  isFinished?: boolean;
   assignments?: IAssignment[];
-  createdAt: Date;
+  createdAt?: Date;
 }
 
 export interface IAdmin {
@@ -30,6 +30,7 @@ export interface IDocument {
 }
 
 export interface IAssignment {
+  _id?: string;
   assignment: string;
   isFinished: boolean;
 }

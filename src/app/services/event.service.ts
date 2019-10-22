@@ -3,12 +3,7 @@ import { IEvent, IEmployee, IVendor, IAssignment } from "../interfaces";
 import { environment } from "src/environments/environment";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Observable } from "rxjs";
-
-const httpOptions = {
-  headers: new HttpHeaders({
-    "Content-Type": "application/json"
-  })
-};
+import { AuthService } from "./auth.service";
 
 @Injectable({
   providedIn: "root"
@@ -217,7 +212,14 @@ export class EventService {
 
   apiUrl = environment.apiUrl;
 
-  constructor(private http: HttpClient) {}
+  httpOptions = {
+    headers: new HttpHeaders({
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${this.authService.getToken()}`
+    })
+  };
+
+  constructor(private http: HttpClient, private authService: AuthService) {}
 
   public getEvents(): Observable<IEvent[]> {
     return this.http.get<IEvent[]>(`${this.apiUrl}/event`);
@@ -227,6 +229,22 @@ export class EventService {
     return this.http.get<IEvent>(`${this.apiUrl}/event/${id}`);
   }
 
+  public addEvent(event: IEvent): Observable<IEvent> {
+    return this.http.post<IEvent>(
+      `${this.apiUrl}/event`,
+      event,
+      this.httpOptions
+    );
+  }
+
+  public updateEvent(id: string, data: any): Observable<IEvent> {
+    return this.http.put<IEvent>(
+      `${this.apiUrl}/event/${id}`,
+      data,
+      this.httpOptions
+    );
+  }
+
   public markAsFinished(id: string) {
     for (let i = 0; i < this.events.length; i++) {
       if (this.events[i]._id === id) {
@@ -234,10 +252,6 @@ export class EventService {
         break;
       }
     }
-  }
-
-  public addEvent(event: IEvent) {
-    this.events.push(event);
   }
 
   public addCommittee(id: string, employee: IEmployee) {

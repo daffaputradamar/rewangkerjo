@@ -23,6 +23,8 @@ export class BuatAcaraComponent implements OnInit {
   categories: ICategory[];
   employees: IEmployee[];
 
+  loading = false;
+
   constructor(
     private fb: FormBuilder,
     private router: Router,
@@ -32,11 +34,12 @@ export class BuatAcaraComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.loading = true;
     this.categoryService.getCategories().subscribe(categories => {
       this.categories = categories;
       this.employeeService.getEmployees().subscribe(employees => {
-        this.employees = employees;
-        this.employees.filter(employee => employee.position === 1);
+        this.employees = employees.filter(employee => employee.position === 1);
+        this.loading = false;
       });
     });
   }
@@ -44,19 +47,17 @@ export class BuatAcaraComponent implements OnInit {
   onSubmit() {
     if (this.acaraForm.valid) {
       const newEvent: IEvent = {
-        _id: "5",
         addressEvent: this.acaraForm.value.addressEvent,
         category: this.categories.find(
           cat => cat._id === this.acaraForm.value.category
         ),
         client: this.acaraForm.value.client,
-        createdAt: new Date(),
-        isFinished: false,
         phone: this.acaraForm.value.phone,
         pic: this.employees.find(em => em._id === this.acaraForm.value.pic)
       };
-      this.eventService.addEvent(newEvent);
-      this.router.navigate(["acara"]);
+      this.eventService.addEvent(newEvent).subscribe(event => {
+        this.router.navigate(["acara"]);
+      });
     }
   }
 }

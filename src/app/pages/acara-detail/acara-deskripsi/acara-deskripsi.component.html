@@ -14,6 +14,9 @@
     >
       {{ event.category.name.toUpperCase() }}
     </span>
+    <span *ngIf="event.isFinished" class="badge badge-pill badge-secondary ml-3"
+      >Acara Selesai</span
+    >
     <hr />
     <div class="row mt-4">
       <div class="col-sm-12 col-md-6 border-right">

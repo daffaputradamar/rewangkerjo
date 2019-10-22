@@ -18,10 +18,10 @@ export class PenugasanItemComponent implements OnInit {
   ngOnInit() {}
 
   setStatus() {
-    this.setAssignmentStatus.emit(this.assignment.assignment);
+    this.setAssignmentStatus.emit(this.assignment._id);
   }
 
   deleteAssignment() {
-    this.deleteAnAssignment.emit(this.assignment.assignment);
+    this.deleteAnAssignment.emit(this.assignment._id);
   }
 }

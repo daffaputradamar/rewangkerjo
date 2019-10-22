@@ -1,8 +1,9 @@
 import { Component, OnInit } from "@angular/core";
 import { CategoryService } from "src/app/services/category.service";
-import { ICategory, IEvent } from "src/app/interfaces";
+import { ICategory, IEvent, IEmployee, IAdmin } from "src/app/interfaces";
 import { EventService } from "src/app/services/event.service";
 import { Observable } from "rxjs";
+import { AuthService } from "src/app/services/auth.service";
 
 @Component({
   selector: "app-acara",
@@ -12,6 +13,7 @@ import { Observable } from "rxjs";
 export class AcaraComponent implements OnInit {
   categories: ICategory[];
   events: IEvent[];
+  user: IEmployee | IAdmin;
   loading = false;
 
   eventsOngoing: IEvent[];
@@ -19,11 +21,13 @@ export class AcaraComponent implements OnInit {
 
   constructor(
     private categoryService: CategoryService,
-    private eventService: EventService
+    private eventService: EventService,
+    private authService: AuthService
   ) {}
 
   ngOnInit() {
     this.loading = true;
+    this.user = this.authService.getUser();
     this.categoryService.getCategories().subscribe(categories => {
       const _categoriesTemp = categories;
       _categoriesTemp.forEach(cat => (cat.isSelected = true));

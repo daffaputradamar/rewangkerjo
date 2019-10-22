@@ -1,139 +1,149 @@
 <div class="container mt-5">
-  <div class="row align-items-center">
-    <div class="col-md-11">
-      <span
-        class="btn font-weight-bold px-5 py-2"
-        [ngStyle]="{
-          'background-color': employee.position === 1 ? colorStaff : colorCrew,
-          color: '#fff'
-        }"
-      >
-        <ng-container *ngIf="employee.position === 1; else elsePosition">
-          Staf
-        </ng-container>
-        <ng-template #elsePosition>
-          Kru
-        </ng-template>
-      </span>
+  <ng-container *ngIf="loading; else loadingCompleted">
+    <div class="d-flex justify-content-center">
+      <div class="spinner-border spinner-border-lg" role="status">
+        <span class="sr-only">Loading...</span>
+      </div>
     </div>
-    <div class="col-md-1">
-      <div class="dropdown text-right">
+  </ng-container>
+  <ng-template #loadingCompleted>
+    <div class="row align-items-center">
+      <div class="col-md-11">
         <span
-          role="button"
-          id="dropdownDeleteEmployee"
-          data-toggle="dropdown"
-          aria-haspopup="true"
-          aria-expanded="false"
-          ><fa-icon [icon]="faEllipsisV"></fa-icon
-        ></span>
-        <div class="dropdown-menu" aria-labelledby="dropdownDeleteEmployee">
-          <a class="dropdown-item" (click)="deleteEmployee()">Delete</a>
+          class="btn font-weight-bold px-5 py-2"
+          [ngStyle]="{
+            'background-color':
+              employee.position === 1 ? colorStaff : colorCrew,
+            color: '#fff'
+          }"
+        >
+          <ng-container *ngIf="employee.position === 1; else elsePosition">
+            Staf
+          </ng-container>
+          <ng-template #elsePosition>
+            Kru
+          </ng-template>
+        </span>
+      </div>
+      <div class="col-md-1">
+        <div class="dropdown text-right">
+          <span
+            role="button"
+            id="dropdownDeleteEmployee"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
+            ><fa-icon [icon]="faEllipsisV"></fa-icon
+          ></span>
+          <div class="dropdown-menu" aria-labelledby="dropdownDeleteEmployee">
+            <a class="dropdown-item" (click)="deleteEmployee()">Delete</a>
+          </div>
         </div>
       </div>
     </div>
-  </div>
 
-  <div class="row mt-5">
-    <div class="col-6 text-left">
-      <h5 class="font-weight-bolder">Detail Profil</h5>
-    </div>
-    <div class="col-6 text-right">
-      <fa-icon [icon]="faEdit" (click)="setEditStatus()"></fa-icon>
-    </div>
-  </div>
-  <hr class="mb-3" />
-  <div class="row">
-    <div class="col-md-6 col-sm-12">
-      <div *ngIf="!editStatus">
-        <h6 class="float-left font-weight-bolder">Nama</h6>
-        <p class="float-right">{{ employee.name }}</p>
-        <div class="clearfix"></div>
-        <h6 class="float-left font-weight-bolder">Alamat</h6>
-        <p class="float-right">{{ employee.address }}</p>
-        <div class="clearfix"></div>
-        <h6 class="float-left font-weight-bolder">Nomor Telepon</h6>
-        <p class="float-right">{{ employee.phone }}</p>
-        <div class="clearfix"></div>
+    <div class="row mt-5">
+      <div class="col-6 text-left">
+        <h5 class="font-weight-bolder">Detail Profil</h5>
       </div>
-      <div *ngIf="editStatus">
-        <div class="form-group row">
-          <label
-            for="inputName"
-            class="col-sm-2 col-form-label font-weight-bold"
-            >Nama</label
-          >
-          <div class="col-sm-10">
-            <input
-              type="text"
-              class="form-control"
-              id="inputName"
-              [(ngModel)]="inputName"
-            />
-          </div>
-        </div>
-        <div class="form-group row">
-          <label
-            for="inputAddress"
-            class="col-sm-2 col-form-label font-weight-bold"
-            >Alamat</label
-          >
-          <div class="col-sm-10">
-            <input
-              type="text"
-              class="form-control"
-              id="inputAddress"
-              [(ngModel)]="inputAddress"
-            />
-          </div>
-        </div>
-        <div class="form-group row">
-          <label
-            for="inputPhone"
-            class="col-sm-2 col-form-label font-weight-bold"
-            >Nomor Telepon</label
-          >
-          <div class="col-sm-10">
-            <input
-              type="text"
-              class="form-control"
-              id="inputPhone"
-              [(ngModel)]="inputPhone"
-            />
-          </div>
-        </div>
+      <div class="col-6 text-right">
+        <fa-icon [icon]="faEdit" (click)="setEditStatus()"></fa-icon>
       </div>
     </div>
-    <div class="col-md-6 col-sm-12">
-      <h5 class="font-weight-bold mb-3">Akun Detail</h5>
-      <div *ngIf="!editStatus">
-        <h6 class="float-left font-weight-bolder">Username</h6>
-        <p class="float-right">{{ employee.username }}</p>
-        <div class="clearfix"></div>
-      </div>
-      <div *ngIf="editStatus">
-        <div class="form-group row">
-          <label
-            for="inputUsername"
-            class="col-sm-2 col-form-label font-weight-bold"
-            >Username</label
-          >
-          <div class="col-sm-10">
-            <input
-              type="text"
-              class="form-control"
-              id="inputUsername"
-              [(ngModel)]="inputUsername"
-            />
+    <hr class="mb-3" />
+    <div class="row">
+      <div class="col-md-6 col-sm-12">
+        <div *ngIf="!editStatus">
+          <h6 class="float-left font-weight-bolder">Nama</h6>
+          <p class="float-right">{{ employee.name }}</p>
+          <div class="clearfix"></div>
+          <h6 class="float-left font-weight-bolder">Alamat</h6>
+          <p class="float-right">{{ employee.address }}</p>
+          <div class="clearfix"></div>
+          <h6 class="float-left font-weight-bolder">Nomor Telepon</h6>
+          <p class="float-right">{{ employee.phone }}</p>
+          <div class="clearfix"></div>
+        </div>
+        <div *ngIf="editStatus">
+          <div class="form-group row">
+            <label
+              for="inputName"
+              class="col-sm-2 col-form-label font-weight-bold"
+              >Nama</label
+            >
+            <div class="col-sm-10">
+              <input
+                type="text"
+                class="form-control"
+                id="inputName"
+                [(ngModel)]="inputName"
+              />
+            </div>
+          </div>
+          <div class="form-group row">
+            <label
+              for="inputAddress"
+              class="col-sm-2 col-form-label font-weight-bold"
+              >Alamat</label
+            >
+            <div class="col-sm-10">
+              <input
+                type="text"
+                class="form-control"
+                id="inputAddress"
+                [(ngModel)]="inputAddress"
+              />
+            </div>
+          </div>
+          <div class="form-group row">
+            <label
+              for="inputPhone"
+              class="col-sm-2 col-form-label font-weight-bold"
+              >Nomor Telepon</label
+            >
+            <div class="col-sm-10">
+              <input
+                type="text"
+                class="form-control"
+                id="inputPhone"
+                [(ngModel)]="inputPhone"
+              />
+            </div>
           </div>
         </div>
       </div>
+      <div class="col-md-6 col-sm-12">
+        <h5 class="font-weight-bold mb-3">Akun Detail</h5>
+        <div *ngIf="!editStatus">
+          <h6 class="float-left font-weight-bolder">Username</h6>
+          <p class="float-right">{{ employee.username }}</p>
+          <div class="clearfix"></div>
+        </div>
+        <div *ngIf="editStatus">
+          <div class="form-group row">
+            <label
+              for="inputUsername"
+              class="col-sm-2 col-form-label font-weight-bold"
+              >Username</label
+            >
+            <div class="col-sm-10">
+              <input
+                type="text"
+                class="form-control"
+                id="inputUsername"
+                [(ngModel)]="inputUsername"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
-  <button
-    class="btn btn-block font-weight-bold btn-purple"
-    *ngIf="editStatus"
-    (click)="editEmployee()"
-  >
-    Ubah
-  </button>
+    <button
+      class="btn btn-block font-weight-bold btn-purple"
+      *ngIf="editStatus"
+      (click)="editEmployee()"
+    >
+      Ubah
+    </button>
+  </ng-template>
 </div>
