@@ -26,7 +26,13 @@
         </span>
       </div>
       <div class="col-md-1">
-        <div class="dropdown text-right">
+        <div
+          class="dropdown text-right"
+          *ngIf="
+            (user.position === 1 && employee.position === 2) ||
+            user.position === undefined
+          "
+        >
           <span
             role="button"
             id="dropdownDeleteEmployee"
@@ -47,7 +53,11 @@
         <h5 class="font-weight-bolder">Detail Profil</h5>
       </div>
       <div class="col-6 text-right">
-        <fa-icon [icon]="faEdit" (click)="setEditStatus()"></fa-icon>
+        <fa-icon
+          [icon]="faEdit"
+          (click)="setEditStatus()"
+          *ngIf="employee._id === user._id"
+        ></fa-icon>
       </div>
     </div>
     <hr class="mb-3" />

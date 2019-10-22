@@ -245,93 +245,10 @@ export class EventService {
     );
   }
 
-  public markAsFinished(id: string) {
-    for (let i = 0; i < this.events.length; i++) {
-      if (this.events[i]._id === id) {
-        this.events[i].isFinished = true;
-        break;
-      }
-    }
-  }
-
-  public addCommittee(id: string, employee: IEmployee) {
-    for (let i = 0; i < this.events.length; i++) {
-      if (this.events[i]._id === id) {
-        this.events[i].committees.push(employee);
-        break;
-      }
-    }
-  }
-
-  public addVendor(id: string, vendor: IVendor) {
-    for (let i = 0; i < this.events.length; i++) {
-      if (this.events[i]._id === id) {
-        this.events[i].vendors.push(vendor);
-        break;
-      }
-    }
-  }
-
-  public addAssignment(id: string, assignment: IAssignment) {
-    for (let i = 0; i < this.events.length; i++) {
-      if (this.events[i]._id === id) {
-        this.events[i].assignments.push(assignment);
-        break;
-      }
-    }
-  }
-
-  public deleteCommittee(id: string, idEmployee: string) {
-    for (let i = 0; i < this.events.length; i++) {
-      if (this.events[i]._id === id) {
-        for (let j = 0; j < this.events[i].committees.length; j++) {
-          if (this.events[i].committees[j]._id === idEmployee) {
-            this.events[i].committees.splice(j, 1);
-            break;
-          }
-        }
-        break;
-      }
-    }
-  }
-
-  public deleteVendor(id: string, idVendor: string) {
-    for (let i = 0; i < this.events.length; i++) {
-      if (this.events[i]._id === id) {
-        if (this.events[i]._id === id) {
-          for (let j = 0; j < this.events[i].vendors.length; j++) {
-            if (this.events[i].vendors[j]._id === idVendor) {
-              this.events[i].vendors.splice(j, 1);
-              break;
-            }
-          }
-          break;
-        }
-      }
-    }
-  }
-
-  public deleteAssignment(id: string, assignment: string) {
-    for (let i = 0; i < this.events.length; i++) {
-      if (this.events[i]._id === id) {
-        if (this.events[i]._id === id) {
-          for (let j = 0; j < this.events[i].assignments.length; j++) {
-            if (this.events[i].assignments[j].assignment === assignment) {
-              this.events[i].assignments.splice(j, 1);
-              break;
-            }
-          }
-          break;
-        }
-      }
-    }
-  }
-
-  public updateAnEvent(id: string, event: IEvent) {
-    for (let i = 0; i < this.events.length; i++) {
-      if (this.events[i]._id === id) {
-        this.events[i] = event;
-      }
-    }
+  public deleteEvent(id: string): Observable<IEmployee> {
+    return this.http.delete<IEmployee>(
+      `${this.apiUrl}/event/${id}`,
+      this.httpOptions
+    );
   }
 }

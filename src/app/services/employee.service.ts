@@ -1,8 +1,9 @@
 import { Injectable } from "@angular/core";
 import { IEmployee } from "../interfaces";
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { environment } from "src/environments/environment";
 import { Observable } from "rxjs";
+import { AuthService } from "./auth.service";
 
 @Injectable({
   providedIn: "root"
@@ -42,8 +43,14 @@ export class EmployeeService {
       username: "robertuswanda"
     }
   ];
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private authService: AuthService) {}
 
+  httpOptions = {
+    headers: new HttpHeaders({
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${this.authService.getToken()}`
+    })
+  };
   apiUrl = environment.apiUrl;
 
   public getEmployees(): Observable<IEmployee[]> {
@@ -54,29 +61,26 @@ export class EmployeeService {
     return this.http.get<IEmployee>(`${this.apiUrl}/employee/${id}`);
   }
 
-  public addEmployee(employee: IEmployee) {
-    this.employees.push(employee);
+  public addEmployee(employee: IEmployee): Observable<IEmployee> {
+    return this.http.post<IEmployee>(
+      `${this.apiUrl}/employee`,
+      employee,
+      this.httpOptions
+    );
   }
 
-  public editEmployee(id: string, employee: IEmployee) {
-    for (let i = 0; i < this.employees.length; i++) {
-      if (this.employees[i]._id === id) {
-        this.employees[i] = employee;
-        break;
-      }
-    }
+  public editEmployee(id: string, data: any): Observable<IEmployee> {
+    return this.http.put<IEmployee>(
+      `${this.apiUrl}/employee`,
+      data,
+      this.httpOptions
+    );
   }
 
-  public deleteEmployee(id: string) {
-    for (let i = 0; i < this.employees.length; i++) {
-      if (this.employees[i]._id === id) {
-        this.employees.splice(i, 1);
-        break;
-      }
-      if (this.employees[i]._id === id) {
-        this.employees.splice(i, 1);
-        break;
-      }
-    }
+  public deleteEmployee(id: string): Observable<IEmployee> {
+    return this.http.delete<IEmployee>(
+      `${this.apiUrl}/employee/${id}`,
+      this.httpOptions
+    );
   }
 }
