@@ -36,7 +36,7 @@ export interface IAssignment {
 }
 
 export interface IEmployee {
-  _id: string;
+  _id?: string;
   username: string;
   name: string;
   address: string;

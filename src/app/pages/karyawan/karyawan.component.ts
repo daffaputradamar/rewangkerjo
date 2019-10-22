@@ -123,23 +123,25 @@ export class KaryawanComponent implements OnInit {
     });
   }
 
-  // addEmployee() {
-  //   let newKaryawan: IEmployee = {
-  //     _id: "5",
-  //     address: this.inputAddress,
-  //     name: this.inputName,
-  //     phone: this.inputPhone,
-  //     username: this.inputUsername,
-  //     password: this.inputPassword,
-  //     position: Number(this.selectedPosition)
-  //   };
-  //   this.employeeService.addEmployee(newKaryawan);
-  //   this.employees = this.employeeService.getEmployees();
-  //   this.employeeStaff = this.getEmployeeStaff();
-  //   this.employeesCrew = this.getEmployeeCrew();
-  //   this.resetForm();
-  //   this.setEditStatus();
-  // }
+  addEmployee() {
+    let newKaryawan: IEmployee = {
+      address: this.inputAddress,
+      name: this.inputName,
+      phone: this.inputPhone,
+      username: this.inputUsername,
+      password: this.inputPassword,
+      position: Number(this.selectedPosition)
+    };
+    this.employeeService.addEmployee(newKaryawan).subscribe(newEmployee => {
+      this.employeeService.getEmployees().subscribe(employees => {
+        this.employees = employees;
+        this.employeeStaff = this.getEmployeeStaff();
+        this.employeesCrew = this.getEmployeeCrew();
+        this.resetForm();
+        this.setEditStatus();
+      });
+    });
+  }
 
   resetForm() {
     this.inputName = "";
