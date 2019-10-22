@@ -74,10 +74,13 @@ export class KaryawanDetailComponent implements OnInit {
       });
   }
 
-  // deleteEmployee() {
-  //   this.employeeService.deleteEmployee(this.employee._id);
-  //   this.router.navigate(["karyawan"]);
-  // }
+  deleteEmployee() {
+    this.employeeService
+      .deleteEmployee(this.employee._id)
+      .subscribe(deletedEmployee => {
+        this.router.navigate(["karyawan"]);
+      });
+  }
 
   resetForm() {
     this.inputName = this.employee.name;
