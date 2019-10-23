@@ -206,4 +206,12 @@ export class AcaraDetailComponent implements OnInit {
         this.router.navigate(["acara"]);
       });
   }
+
+  deleteEvent($event) {
+    this.eventService
+      .deleteEvent($event)
+      .subscribe(event => {
+        this.router.navigate(["acara"]);
+      })
+  }
 }

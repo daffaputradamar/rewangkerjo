@@ -8,6 +8,7 @@
   </div>
   <ng-template #loadingCompleted>
     <app-acara-deskripsi
+      (deleteEvent)="deleteEvent($event)"
       [event]="event"
       [date]="formattedDate"
     ></app-acara-deskripsi>

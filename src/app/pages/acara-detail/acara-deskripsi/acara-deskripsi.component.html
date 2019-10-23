@@ -17,6 +17,13 @@
     <span *ngIf="event.isFinished" class="badge badge-pill badge-secondary ml-3"
       >Acara Selesai</span
     >
+    <button
+      *ngIf="event.isFinished"
+      class="btn btn-outline-secondary ml-3 float-right"
+      (click)="deleteAcara()"
+    >
+      Hapus Acara
+    </button>
     <hr />
     <div class="row mt-4">
       <div class="col-sm-12 col-md-6 border-right">
