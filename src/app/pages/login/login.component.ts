@@ -8,6 +8,8 @@ import { AuthService } from "src/app/services/auth.service";
   styleUrls: ["./login.component.css"]
 })
 export class LoginComponent implements OnInit {
+  isAdminLogin = false;
+
   loginForm = this.fb.group({
     username: ["", Validators.required],
     password: ["", Validators.required]
@@ -17,9 +19,21 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {}
 
+  setLoginAdmin() {
+    this.isAdminLogin = true;
+  }
+
+  setLoginEmployee() {
+    this.isAdminLogin = false;
+  }
+
   onSubmit() {
     if (this.loginForm.valid) {
-      this.authService.login(this.loginForm.value);
+      if (this.isAdminLogin) {
+        this.authService.loginAdmin(this.loginForm.value);
+      } else {
+        this.authService.login(this.loginForm.value);
+      }
     }
   }
 }

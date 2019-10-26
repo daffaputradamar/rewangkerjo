@@ -8,7 +8,10 @@
       >
       </app-karyawan-categories>
       <hr />
-      <div class="mb-3">
+      <div
+        class="mb-3"
+        *ngIf="user.position === 1 || user.position === undefined"
+      >
         <button
           class="btn btn-block rounded btn-outline-purple font-weight-bold"
           (click)="setEditStatus()"
@@ -52,7 +55,7 @@
             [(ngModel)]="selectedPosition"
           >
             <option
-              *ngFor="let position of employeePosition"
+              *ngFor="let position of employeePositionSelect"
               [value]="position.position"
             >
               {{ position.name }}

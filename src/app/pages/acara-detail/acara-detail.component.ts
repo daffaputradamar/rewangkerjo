@@ -59,6 +59,7 @@ export class AcaraDetailComponent implements OnInit {
         this.committees = this.event.committees;
         this.vendors = this.event.vendors;
         this.assignments = this.event.assignments;
+        this.loading = false;
 
         this.employeeService.getEmployees().subscribe(employees => {
           this.employees = employees;
@@ -66,7 +67,6 @@ export class AcaraDetailComponent implements OnInit {
           this.vendorService.getVendors().subscribe(vendors => {
             this.availableVendors = vendors;
             this.selectedVendor = vendors[0]._id;
-            this.loading = false;
           });
         });
       });
@@ -208,10 +208,8 @@ export class AcaraDetailComponent implements OnInit {
   }
 
   deleteEvent($event) {
-    this.eventService
-      .deleteEvent($event)
-      .subscribe(event => {
-        this.router.navigate(["acara"]);
-      })
+    this.eventService.deleteEvent($event).subscribe(event => {
+      this.router.navigate(["acara"]);
+    });
   }
 }

@@ -13,11 +13,12 @@ import { AuthService } from "src/app/services/auth.service";
   styleUrls: ["./karyawan-detail.component.css"]
 })
 export class KaryawanDetailComponent implements OnInit {
-  employee: IEmployee;
-  user: IEmployee | IAdmin;
+  employee;
+  user;
   id: string;
   editStatus = false;
   loading = false;
+  isAdmin: boolean;
 
   colorCrew = crew;
   colorStaff = staff;
@@ -41,14 +42,27 @@ export class KaryawanDetailComponent implements OnInit {
     this.user = this.authService.getUser();
     this.activatedRoute.paramMap.subscribe(params => {
       this.id = params.get("id");
-      this.employeeService.showEmployee(this.id).subscribe(employee => {
-        this.employee = employee;
-        this.inputName = this.employee.name;
-        this.inputAddress = this.employee.address;
-        this.inputPhone = this.employee.phone;
-        this.inputUsername = this.employee.username;
-        this.loading = false;
-      });
+      if (this.user.position === undefined) {
+        this.employeeService.showAdmin(this.id).subscribe(employee => {
+          this.employee = employee;
+          this.inputName = this.employee.name;
+          this.inputAddress = this.employee.address;
+          this.inputPhone = this.employee.phone;
+          this.inputUsername = this.employee.username;
+          this.isAdmin = true;
+          this.loading = false;
+        });
+      } else {
+        this.employeeService.showEmployee(this.id).subscribe(employee => {
+          this.employee = employee;
+          this.inputName = this.employee.name;
+          this.inputAddress = this.employee.address;
+          this.inputPhone = this.employee.phone;
+          this.inputUsername = this.employee.username;
+          this.isAdmin = false;
+          this.loading = false;
+        });
+      }
     });
   }
 

@@ -1,8 +1,9 @@
 import { Component, OnInit } from "@angular/core";
 import { EmployeeService } from "src/app/services/employee.service";
-import { IEmployee } from "src/app/interfaces";
+import { IEmployee, IAdmin } from "src/app/interfaces";
 
 import { crew, staff } from "../../../assets/color";
+import { AuthService } from "src/app/services/auth.service";
 
 @Component({
   selector: "app-karyawan",
@@ -25,6 +26,8 @@ export class KaryawanComponent implements OnInit {
   inputSearchKru: string;
   inputSearchStaf: string;
 
+  user;
+
   employeePosition = [
     {
       name: "Kru",
@@ -40,13 +43,40 @@ export class KaryawanComponent implements OnInit {
     }
   ];
 
-  constructor(private employeeService: EmployeeService) {}
+  employeePositionSelect;
+
+  constructor(
+    private employeeService: EmployeeService,
+    private authService: AuthService
+  ) {}
 
   ngOnInit() {
     this.employeeService.getEmployees().subscribe(employees => {
       this.employees = employees;
       this.employeeStaff = this.getEmployeeStaff();
       this.employeesCrew = this.getEmployeeCrew();
+
+      this.user = this.authService.getUser();
+
+      if (this.user.position === undefined) {
+        this.employeePositionSelect = [
+          {
+            name: "Kru",
+            position: 2
+          },
+          {
+            name: "Staf",
+            position: 1
+          }
+        ];
+      } else if (this.user.position === 1) {
+        this.employeePositionSelect = [
+          {
+            name: "Kru",
+            position: 2
+          }
+        ];
+      }
 
       this.inputSearchKru = "";
       this.inputSearchStaf = "";
@@ -56,7 +86,7 @@ export class KaryawanComponent implements OnInit {
       this.inputAddress = "";
       this.inputUsername = "";
       this.inputPassword = "";
-      this.selectedPosition = "2";
+      this.selectedPosition = this.employeePositionSelect[0].position;
     });
   }
 
@@ -89,14 +119,14 @@ export class KaryawanComponent implements OnInit {
   }
 
   getEmployeeStaff(): IEmployee[] {
-    let selectedEmployees = this.getSelectedEmployees();
+    const selectedEmployees = this.getSelectedEmployees();
     const employeeStaff = selectedEmployees.filter(
       employee => employee.position === 1
     );
     return employeeStaff;
   }
   getEmployeeCrew(): IEmployee[] {
-    let selectedEmployees = this.getSelectedEmployees();
+    const selectedEmployees = this.getSelectedEmployees();
     const employeesCrew = selectedEmployees.filter(
       employee => employee.position === 2
     );
@@ -124,7 +154,7 @@ export class KaryawanComponent implements OnInit {
   }
 
   addEmployee() {
-    let newKaryawan: IEmployee = {
+    const newKaryawan: IEmployee = {
       address: this.inputAddress,
       name: this.inputName,
       phone: this.inputPhone,

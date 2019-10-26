@@ -19,7 +19,7 @@ export class AuthService {
   public jwt: string;
 
   setLoginStatus(status: boolean) {
-    this.loginStatus.next(localStorage.getItem("token") ? true : false);
+    this.loginStatus.next(status);
   }
 
   getLoginStatus(): Observable<boolean> {
@@ -37,9 +37,25 @@ export class AuthService {
   constructor(private router: Router, private http: HttpClient) {}
 
   public login(user: IUser) {
-    this.loginStatus.next(true);
     this.http
       .post<IToken>(`${this.apiUrl}/employee/login`, {
+        username: user.username,
+        password: user.password
+      })
+      .subscribe(token => {
+        if (token.success !== false || token.token !== undefined) {
+          this.jwt = token.token as string;
+          localStorage.setItem("token", this.jwt);
+          localStorage.setItem("user", JSON.stringify(decode(this.jwt).data));
+          this.setLoginStatus(true);
+          this.router.navigate(["/acara"]);
+        }
+      });
+  }
+
+  public loginAdmin(user: IUser) {
+    this.http
+      .post<IToken>(`${this.apiUrl}/admin/login`, {
         username: user.username,
         password: user.password
       })

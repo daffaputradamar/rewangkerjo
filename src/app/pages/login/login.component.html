@@ -1,10 +1,28 @@
-<div class="container mt-5 mx-5">
+<div class="container mt-5">
   <div class="row">
     <div class="col-md-6 col-sm-12">
-      <div class="my-3 ml-5">
+      <div class="my-3 mx-auto">
         <h1 class="font-weight-bolder text-purple mb-4 text-center">
           Selamat Datang Kembali
         </h1>
+        <div class="float-right">
+          <h6>Login Sebagai:</h6>
+          <button
+            class="border-right pr-3 btn"
+            [ngClass]="{ 'font-weight-bold': !isAdminLogin }"
+            (click)="setLoginEmployee()"
+          >
+            Karyawan
+          </button>
+          <button
+            class="pl-3 btn"
+            [ngClass]="{ 'font-weight-bold': isAdminLogin }"
+            (click)="setLoginAdmin()"
+          >
+            Admin
+          </button>
+        </div>
+        <div class="clearfix"></div>
         <form class="mt-5" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
           <div class="form-group mb-5">
             <label for="username" class="font-weight-bold">Username</label>
@@ -33,7 +51,7 @@
       </div>
     </div>
     <div class="col-md-6 col-sm-12">
-      <div class="ml-5 d-flex justify-content-center align-items-center">
+      <div class="ml-4 mr-4 d-flex justify-content-center align-items-center">
         <img
           src="assets/img/login.png"
           alt="beranda illustration"
