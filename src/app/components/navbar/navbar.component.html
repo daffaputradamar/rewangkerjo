@@ -41,11 +41,20 @@
             >
           </li>
           <li class="nav-item mr-5" *ngIf="user">
-            <a
-              routerLink="/karyawan-detail/{{ user._id }}"
-              class="nav-link text-dark text-medium font-weight-bold"
-              >Profil</a
-            >
+            <ng-container *ngIf="!isAdmin; else profilAdmin">
+              <a
+                routerLink="/karyawan-detail/{{ user._id }}"
+                class="nav-link text-dark text-medium font-weight-bold"
+                >Profil</a
+              >
+            </ng-container>
+            <ng-template #profilAdmin>
+              <a
+                routerLink="/admin-detail/{{ user._id }}"
+                class="nav-link text-dark text-medium font-weight-bold"
+                >Profil</a
+              >
+            </ng-template>
           </li>
           <li class="nav-item">
             <a

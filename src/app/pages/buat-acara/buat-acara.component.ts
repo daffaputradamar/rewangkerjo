@@ -15,6 +15,7 @@ export class BuatAcaraComponent implements OnInit {
   acaraForm = this.fb.group({
     client: ["", Validators.required],
     addressEvent: ["", Validators.required],
+    createdAt: ["", Validators.required],
     phone: ["", Validators.required],
     category: ["1", Validators.required],
     pic: ["1", Validators.required]
@@ -53,7 +54,8 @@ export class BuatAcaraComponent implements OnInit {
         ),
         client: this.acaraForm.value.client,
         phone: this.acaraForm.value.phone,
-        pic: this.employees.find(em => em._id === this.acaraForm.value.pic)
+        pic: this.employees.find(em => em._id === this.acaraForm.value.pic),
+        createdAt: this.acaraForm.value.createdAt
       };
       this.eventService.addEvent(newEvent).subscribe(event => {
         this.router.navigate(["acara"]);

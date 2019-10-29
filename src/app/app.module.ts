@@ -25,11 +25,12 @@ import { VendorItemComponent } from "./pages/acara-detail/vendor-list/vendor-ite
 import { PenugasanItemComponent } from "./pages/acara-detail/penugasan-list/penugasan-item/penugasan-item.component";
 import { EmployeeComponent } from "./components/buttons/employee/employee.component";
 import { DokumenItemComponent } from "./pages/acara-detail/dokumen-list/dokumen-item/dokumen-item.component";
-import { KaryawanComponent } from './pages/karyawan/karyawan.component';
-import { KaryawanListComponent } from './pages/karyawan/karyawan-list/karyawan-list.component';
-import { KaryawanCategoriesComponent } from './pages/karyawan/karyawan-categories/karyawan-categories.component';
-import { KaryawanDetailComponent } from './pages/karyawan-detail/karyawan-detail.component';
-import { BuatAcaraComponent } from './pages/buat-acara/buat-acara.component';
+import { KaryawanComponent } from "./pages/karyawan/karyawan.component";
+import { KaryawanListComponent } from "./pages/karyawan/karyawan-list/karyawan-list.component";
+import { KaryawanCategoriesComponent } from "./pages/karyawan/karyawan-categories/karyawan-categories.component";
+import { KaryawanDetailComponent } from "./pages/karyawan-detail/karyawan-detail.component";
+import { BuatAcaraComponent } from "./pages/buat-acara/buat-acara.component";
+import { AdminDetailComponent } from "./pages/karyawan-detail/admin-detail/admin-detail.component";
 
 @NgModule({
   declarations: [
@@ -57,7 +58,8 @@ import { BuatAcaraComponent } from './pages/buat-acara/buat-acara.component';
     KaryawanListComponent,
     KaryawanCategoriesComponent,
     KaryawanDetailComponent,
-    BuatAcaraComponent
+    BuatAcaraComponent,
+    AdminDetailComponent
   ],
   imports: [
     BrowserModule,

@@ -11,7 +11,8 @@ import { IEmployee, IAdmin } from "src/app/interfaces";
 export class NavbarComponent implements OnInit {
   isLoggedIn: boolean;
   faBars = faBars;
-  user?: IEmployee | IAdmin;
+  user;
+  isAdmin;
 
   constructor(private authService: AuthService) {}
 
@@ -20,6 +21,7 @@ export class NavbarComponent implements OnInit {
       this.isLoggedIn = status;
       if (this.isLoggedIn) {
         this.user = this.authService.getUser();
+        this.isAdmin = this.user.position === undefined ? true : false;
       } else {
         this.user = null;
       }

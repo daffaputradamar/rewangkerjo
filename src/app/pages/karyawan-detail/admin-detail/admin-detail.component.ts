@@ -1,18 +1,16 @@
 import { Component, OnInit } from "@angular/core";
-import { EmployeeService } from "src/app/services/employee.service";
-import { IEmployee, IAdmin } from "src/app/interfaces";
-import { ActivatedRoute, Router } from "@angular/router";
 
-import { faEdit, faEllipsisV } from "@fortawesome/free-solid-svg-icons";
-import { crew, staff } from "../../../assets/color";
+import { faEdit } from "@fortawesome/free-solid-svg-icons";
+import { ActivatedRoute, Router } from "@angular/router";
+import { EmployeeService } from "src/app/services/employee.service";
 import { AuthService } from "src/app/services/auth.service";
 
 @Component({
-  selector: "app-karyawan-detail",
-  templateUrl: "./karyawan-detail.component.html",
-  styleUrls: ["./karyawan-detail.component.css"]
+  selector: "app-admin-detail",
+  templateUrl: "./admin-detail.component.html",
+  styleUrls: ["./admin-detail.component.css"]
 })
-export class KaryawanDetailComponent implements OnInit {
+export class AdminDetailComponent implements OnInit {
   employee;
   user;
   id: string;
@@ -20,10 +18,7 @@ export class KaryawanDetailComponent implements OnInit {
   loading = false;
   isAdmin: boolean;
 
-  colorCrew = crew;
-  colorStaff = staff;
   faEdit = faEdit;
-  faEllipsisV = faEllipsisV;
 
   inputName: string;
   inputAddress: string;
@@ -43,7 +38,7 @@ export class KaryawanDetailComponent implements OnInit {
     this.isAdmin = this.user.position === undefined ? true : false;
     this.activatedRoute.paramMap.subscribe(params => {
       this.id = params.get("id");
-      this.employeeService.showEmployee(this.id).subscribe(employee => {
+      this.employeeService.showAdmin(this.id).subscribe(employee => {
         this.employee = employee;
         this.inputName = this.employee.name;
         this.inputAddress = this.employee.address;
@@ -68,7 +63,7 @@ export class KaryawanDetailComponent implements OnInit {
     this.employeeService
       .editEmployee(this.employee._id, newEmployee)
       .subscribe(newEmployee => {
-        this.employeeService.showEmployee(this.id).subscribe(employee => {
+        this.employeeService.showAdmin(this.id).subscribe(employee => {
           this.employee = employee;
           this.setEditStatus();
           this.resetForm();

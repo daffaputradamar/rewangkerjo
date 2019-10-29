@@ -10,7 +10,6 @@
     <div class="row align-items-center">
       <div class="col-md-11">
         <span
-          *ngIf="!isAdmin"
           class="btn font-weight-bold px-5 py-2"
           [ngStyle]="{
             'background-color':
@@ -24,16 +23,6 @@
           <ng-template #elsePosition>
             Kru
           </ng-template>
-        </span>
-        <span
-          *ngIf="isAdmin"
-          class="btn font-weight-bold px-5 py-2"
-          [ngStyle]="{
-            'background-color': '#5f27cd',
-            color: '#fff'
-          }"
-        >
-          Admin
         </span>
       </div>
       <div class="col-md-1">
@@ -71,7 +60,7 @@
     <hr class="mb-3" />
     <div class="row">
       <div class="col-md-6 col-sm-12">
-        <div *ngIf="!editStatus && !isAdmin">
+        <div *ngIf="!editStatus">
           <h6 class="float-left font-weight-bolder">Nama</h6>
           <p class="float-right">{{ employee.name }}</p>
           <div class="clearfix"></div>
@@ -82,7 +71,7 @@
           <p class="float-right">{{ employee.phone }}</p>
           <div class="clearfix"></div>
         </div>
-        <div *ngIf="editStatus && !isAdmin">
+        <div *ngIf="editStatus">
           <div class="form-group row">
             <label
               for="inputName"

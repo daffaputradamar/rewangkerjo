@@ -9,6 +9,7 @@ import { AuthGuardService } from "./services/auth-guard.service";
 import { KaryawanComponent } from "./pages/karyawan/karyawan.component";
 import { KaryawanDetailComponent } from "./pages/karyawan-detail/karyawan-detail.component";
 import { BuatAcaraComponent } from "./pages/buat-acara/buat-acara.component";
+import { AdminDetailComponent } from "./pages/karyawan-detail/admin-detail/admin-detail.component";
 
 const routes: Routes = [
   {
@@ -39,6 +40,11 @@ const routes: Routes = [
   {
     path: "karyawan-detail/:id",
     component: KaryawanDetailComponent,
+    canActivate: [AuthGuardService]
+  },
+  {
+    path: "admin-detail/:id",
+    component: AdminDetailComponent,
     canActivate: [AuthGuardService]
   },
   {
