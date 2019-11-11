@@ -108,12 +108,31 @@
     </div>
     <div class="mt-3" *ngIf="editAssignment">
       <div class="row">
-        <input
-          type="text"
-          class="form-control col-sm-12 col-md-8"
-          [(ngModel)]="inputAssignment"
-        />
-        <div class="col-sm-12 col-md-4">
+        <div class="col-sm-4 col-md-3">
+          <label for="panitiaName">Nama Panitia</label>
+          <select
+            id="panitiaName"
+            class="form-control"
+            [(ngModel)]="selectedEmployeeAssignment"
+          >
+            <option
+              *ngFor="let committee of committees"
+              [value]="committee._id"
+            >
+              {{ committee.name }}
+            </option>
+          </select>
+        </div>
+        <div class="col-sm-8 col-md-7">
+          <label for="panitiaTugas">Masukkan Tugas</label>
+          <input
+            id="panitiaTugas"
+            type="text"
+            class="form-control"
+            [(ngModel)]="inputAssignment"
+          />
+        </div>
+        <div class="col-sm-12 col-md-2 d-flex align-items-end">
           <button class="btn btn-block btn-purple" (click)="addAssignment()">
             Tambah
           </button>

@@ -33,6 +33,8 @@ export interface IAssignment {
   _id?: string;
   assignment: string;
   isFinished: boolean;
+  employee: string | IEmployee;
+  event: string | IEvent;
 }
 
 export interface IEmployee {
@@ -43,6 +45,7 @@ export interface IEmployee {
   phone: string;
   position: number;
   password?: string;
+  assignments?: IAssignment[];
 }
 
 export interface IVendor {

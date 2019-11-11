@@ -23,46 +23,18 @@
     </div>
 
     <div class="row mt-5">
-      <div class="col-6 text-left">
+      <div class="col text-left">
         <h5 class="font-weight-bolder">Detail Profil</h5>
       </div>
-      <div class="col-6 text-right"></div>
     </div>
     <hr class="mb-3" />
     <div class="row">
       <div class="col-md-6 col-sm-12">
         <h5 class="font-weight-bold mb-3">Akun Detail</h5>
-        <div *ngIf="!editStatus">
-          <h6 class="float-left font-weight-bolder">Username</h6>
-          <p class="float-right">{{ employee.username }}</p>
-          <div class="clearfix"></div>
-        </div>
-        <div *ngIf="editStatus">
-          <div class="form-group row">
-            <label
-              for="inputUsername"
-              class="col-sm-2 col-form-label font-weight-bold"
-              >Username</label
-            >
-            <div class="col-sm-10">
-              <input
-                type="text"
-                class="form-control"
-                id="inputUsername"
-                [(ngModel)]="inputUsername"
-              />
-            </div>
-          </div>
-        </div>
+        <h6 class="float-left font-weight-bolder">Username</h6>
+        <p class="float-right">{{ employee.username }}</p>
+        <div class="clearfix"></div>
       </div>
-      <div class="col-md-6 col-sm-12"></div>
     </div>
-    <button
-      class="btn btn-block font-weight-bold btn-purple"
-      *ngIf="editStatus"
-      (click)="editEmployee()"
-    >
-      Ubah
-    </button>
   </ng-template>
 </div>

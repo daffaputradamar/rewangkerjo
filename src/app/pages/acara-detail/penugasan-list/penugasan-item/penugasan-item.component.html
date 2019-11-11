@@ -10,7 +10,8 @@
         (change)="setStatus()"
       />
       <label class="form-check-label" for="{{ assignment.assignment }}">
-        {{ assignment.assignment }}
+        {{ assignment.assignment }} -
+        <span class="text-muted">({{ assignment.employee.name }})</span>
       </label>
     </div>
   </div>

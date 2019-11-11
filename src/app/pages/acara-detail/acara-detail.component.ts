@@ -13,6 +13,7 @@ import { EventService } from "src/app/services/event.service";
 import { faEdit } from "@fortawesome/free-solid-svg-icons";
 import { EmployeeService } from "src/app/services/employee.service";
 import { VendorService } from "src/app/services/vendor.service";
+import { AssignmentService } from "src/app/services/assignment.service";
 
 @Component({
   selector: "app-acara-detail",
@@ -33,6 +34,7 @@ export class AcaraDetailComponent implements OnInit {
   faEdit = faEdit;
 
   selectedEmployee: string;
+  selectedEmployeeAssignment: string;
   selectedVendor: string;
   inputAssignment: string;
 
@@ -45,6 +47,7 @@ export class AcaraDetailComponent implements OnInit {
     private eventService: EventService,
     private employeeService: EmployeeService,
     private vendorService: VendorService,
+    private assignmentService: AssignmentService,
     private router: Router
   ) {}
 
@@ -59,6 +62,9 @@ export class AcaraDetailComponent implements OnInit {
         this.committees = this.event.committees;
         this.vendors = this.event.vendors;
         this.assignments = this.event.assignments;
+        if (this.committees.length > 0) {
+          this.selectedEmployeeAssignment = this.committees[0]._id;
+        }
         this.loading = false;
 
         this.employeeService.getEmployees().subscribe(employees => {
@@ -116,19 +122,17 @@ export class AcaraDetailComponent implements OnInit {
   addAssignment() {
     const newAssignment: IAssignment = {
       assignment: this.inputAssignment,
-      isFinished: false
+      isFinished: false,
+      employee: this.selectedEmployeeAssignment,
+      event: this.event._id
     };
-    this.eventService
-      .updateEvent(this.event._id, {
-        assignments: [...this.event.assignments, newAssignment]
-      })
-      .subscribe(event => {
-        this.eventService.showEvent(this.event._id).subscribe(event => {
-          this.event = event;
-          this.assignments = this.event.assignments;
-          this.inputAssignment = "";
-        });
+    this.assignmentService.addAssignment(newAssignment).subscribe(e => {
+      this.eventService.showEvent(this.event._id).subscribe(event => {
+        this.event = event;
+        this.assignments = this.event.assignments;
+        this.inputAssignment = "";
       });
+    });
   }
 
   deletePanitia($event) {
@@ -162,31 +166,26 @@ export class AcaraDetailComponent implements OnInit {
   }
 
   deleteAssignment($event) {
-    const newAssignments = this.event.assignments.filter(
-      assignment => assignment._id !== $event
-    );
-    this.eventService
-      .updateEvent(this.event._id, {
-        assignments: newAssignments
-      })
-      .subscribe(event => {
-        this.eventService.showEvent(this.event._id).subscribe(event => {
-          this.event = event;
-          this.assignments = this.event.assignments;
-        });
+    this.assignmentService.deleteAssignment($event).subscribe(assignment => {
+      this.eventService.showEvent(this.event._id).subscribe(event => {
+        this.event = event;
+        this.assignments = this.event.assignments;
       });
+    });
   }
 
   setAssignment($event) {
-    const newAssignments = this.event.assignments.map(assignment => {
-      if (assignment._id === $event) {
-        assignment.isFinished = !assignment.isFinished;
+    let assignmentSet: IAssignment;
+    for (let i = 0; i < this.assignments.length; i++) {
+      if (this.assignments[i]._id === $event) {
+        assignmentSet = this.assignments[i];
+        break;
       }
-      return assignment;
-    });
-    this.eventService
-      .updateEvent(this.event._id, {
-        assignments: newAssignments
+    }
+    assignmentSet.isFinished = !assignmentSet.isFinished;
+    this.assignmentService
+      .updateAssignment(assignmentSet._id, {
+        isFinished: assignmentSet.isFinished
       })
       .subscribe(event => {
         this.eventService.showEvent(this.event._id).subscribe(event => {

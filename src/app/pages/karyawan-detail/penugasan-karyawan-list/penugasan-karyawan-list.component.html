@@ -1,0 +1,20 @@
+<h5 class="font-weight-bolder">Tugas</h5>
+<br />
+<div *ngFor="let key of assignmentKeys">
+  <h6 class="font-weight-bolder mb-2" routerLink="/acara-detail/{{ key }}">
+    <span
+      [ngStyle]="{
+        color: assignmentOrganized[key][0].event.category.color
+      }"
+      >{{ assignmentOrganized[key][0].event.category.name.toUpperCase() }}</span
+    >
+    -
+    {{ assignmentOrganized[key][0].event.client }}
+  </h6>
+  <ul *ngFor="let assignment of assignmentOrganized[key]">
+    <app-penugasan-karyawan-item
+      [assignment]="assignment"
+    ></app-penugasan-karyawan-item>
+  </ul>
+  <br />
+</div>

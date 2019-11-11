@@ -31,6 +31,8 @@ import { KaryawanCategoriesComponent } from "./pages/karyawan/karyawan-categorie
 import { KaryawanDetailComponent } from "./pages/karyawan-detail/karyawan-detail.component";
 import { BuatAcaraComponent } from "./pages/buat-acara/buat-acara.component";
 import { AdminDetailComponent } from "./pages/karyawan-detail/admin-detail/admin-detail.component";
+import { PenugasanKaryawanListComponent } from './pages/karyawan-detail/penugasan-karyawan-list/penugasan-karyawan-list.component';
+import { PenugasanKaryawanItemComponent } from './pages/karyawan-detail/penugasan-karyawan-list/penugasan-karyawan-item/penugasan-karyawan-item.component';
 
 @NgModule({
   declarations: [
@@ -59,7 +61,9 @@ import { AdminDetailComponent } from "./pages/karyawan-detail/admin-detail/admin
     KaryawanCategoriesComponent,
     KaryawanDetailComponent,
     BuatAcaraComponent,
-    AdminDetailComponent
+    AdminDetailComponent,
+    PenugasanKaryawanListComponent,
+    PenugasanKaryawanItemComponent
   ],
   imports: [
     BrowserModule,

@@ -152,5 +152,19 @@
     >
       Ubah
     </button>
+    <hr />
+    <ng-container
+      *ngIf="
+        !employee.assignments || employee.assignments.length === 0;
+        else assignmentIsFound
+      "
+    >
+      <p>Tidak ada penugasan</p>
+    </ng-container>
+    <ng-template #assignmentIsFound>
+      <app-penugasan-karyawan-list
+        [assignments]="employee.assignments"
+      ></app-penugasan-karyawan-list>
+    </ng-template>
   </ng-template>
 </div>
