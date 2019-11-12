@@ -1,11 +1,12 @@
 import { Component, OnInit } from "@angular/core";
 import { EmployeeService } from "src/app/services/employee.service";
-import { IEmployee, IAdmin } from "src/app/interfaces";
+import { IEmployee, IAdmin, IAssignment } from "src/app/interfaces";
 import { ActivatedRoute, Router } from "@angular/router";
 
 import { faEdit, faEllipsisV } from "@fortawesome/free-solid-svg-icons";
 import { crew, staff } from "../../../assets/color";
 import { AuthService } from "src/app/services/auth.service";
+import { AssignmentService } from "src/app/services/assignment.service";
 
 @Component({
   selector: "app-karyawan-detail",
@@ -13,7 +14,7 @@ import { AuthService } from "src/app/services/auth.service";
   styleUrls: ["./karyawan-detail.component.css"]
 })
 export class KaryawanDetailComponent implements OnInit {
-  employee;
+  employee: IEmployee;
   user;
   id: string;
   editStatus = false;
@@ -33,6 +34,7 @@ export class KaryawanDetailComponent implements OnInit {
   constructor(
     private activatedRoute: ActivatedRoute,
     private employeeService: EmployeeService,
+    private assignmentService: AssignmentService,
     private authService: AuthService,
     private router: Router
   ) {}
@@ -81,6 +83,35 @@ export class KaryawanDetailComponent implements OnInit {
       .deleteEmployee(this.employee._id)
       .subscribe(deletedEmployee => {
         this.router.navigate(["karyawan"]);
+      });
+  }
+
+  setAssignment($event) {
+    let assignmentSet: IAssignment;
+    for (let i = 0; i < this.employee.assignments.length; i++) {
+      if (this.employee.assignments[i]._id === $event) {
+        assignmentSet = this.employee.assignments[i];
+        break;
+      }
+    }
+
+    assignmentSet.isFinished = !assignmentSet.isFinished;
+
+    this.assignmentService
+      .updateAssignment(assignmentSet._id, {
+        isFinished: assignmentSet.isFinished
+      })
+      .subscribe(event => {
+        this.activatedRoute.paramMap.subscribe(params => {
+          this.id = params.get("id");
+          this.employeeService.showEmployee(this.id).subscribe(employee => {
+            this.employee = employee;
+            this.inputName = this.employee.name;
+            this.inputAddress = this.employee.address;
+            this.inputPhone = this.employee.phone;
+            this.inputUsername = this.employee.username;
+          });
+        });
       });
   }
 

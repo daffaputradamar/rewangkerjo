@@ -8,7 +8,6 @@ import { IEmployee } from "src/app/interfaces";
 })
 export class KaryawanListComponent implements OnInit {
   @Input() employees: IEmployee[];
-
   constructor() {}
 
   ngOnInit() {}

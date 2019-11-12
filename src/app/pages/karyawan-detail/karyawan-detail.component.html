@@ -164,6 +164,7 @@
     <ng-template #assignmentIsFound>
       <app-penugasan-karyawan-list
         [assignments]="employee.assignments"
+        (setAssignment)="setAssignment($event)"
       ></app-penugasan-karyawan-list>
     </ng-template>
   </ng-template>

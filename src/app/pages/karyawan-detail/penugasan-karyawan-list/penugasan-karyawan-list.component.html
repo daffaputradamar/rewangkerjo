@@ -14,6 +14,8 @@
   <ul *ngFor="let assignment of assignmentOrganized[key]">
     <app-penugasan-karyawan-item
       [assignment]="assignment"
+      [user]="user"
+      (setAnAssignment)="setAnAssignment($event)"
     ></app-penugasan-karyawan-item>
   </ul>
   <br />

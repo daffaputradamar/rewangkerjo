@@ -28,9 +28,9 @@ export class AcaraDetailComponent implements OnInit {
   committees: IEmployee[];
   vendors: IVendor[];
   assignments: IAssignment[];
-  // documents: IDocument[];
   employees: IEmployee[];
   availableVendors: IVendor[];
+
   faEdit = faEdit;
 
   selectedEmployee: string;

@@ -86,7 +86,9 @@ export class KaryawanComponent implements OnInit {
       this.inputAddress = "";
       this.inputUsername = "";
       this.inputPassword = "";
-      this.selectedPosition = this.employeePositionSelect[0].position;
+      if (this.user.position !== 2) {
+        this.selectedPosition = this.employeePositionSelect[0].position;
+      }
     });
   }
 

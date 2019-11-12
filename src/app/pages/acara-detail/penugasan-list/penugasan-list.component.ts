@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
 import { IAssignment } from "src/app/interfaces";
+import { AuthService } from "src/app/services/auth.service";
 
 @Component({
   selector: "app-penugasan-list",
@@ -10,9 +11,13 @@ export class PenugasanListComponent implements OnInit {
   @Input() assignments: IAssignment[];
   @Output() setAssignment = new EventEmitter<string>();
   @Output() deleteAssignment = new EventEmitter<string>();
-  constructor() {}
 
-  ngOnInit() {}
+  user;
+  constructor(private authService: AuthService) {}
+
+  ngOnInit() {
+    this.user = this.authService.getUser();
+  }
 
   setAssignmentStatus($event) {
     this.setAssignment.emit($event);

@@ -1,5 +1,6 @@
-import { Component, OnInit, Input } from "@angular/core";
-import { IAssignment, IEvent } from "src/app/interfaces";
+import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
+import { IAssignment, IEvent, IAdmin, IEmployee } from "src/app/interfaces";
+import { AuthService } from "src/app/services/auth.service";
 
 @Component({
   selector: "app-penugasan-karyawan-list",
@@ -8,13 +9,17 @@ import { IAssignment, IEvent } from "src/app/interfaces";
 })
 export class PenugasanKaryawanListComponent implements OnInit {
   @Input() assignments: IAssignment[];
+  @Output() setAssignment = new EventEmitter<string>();
 
   assignmentOrganized;
   assignmentKeys: string[];
 
-  constructor() {}
+  user: IAdmin | IEmployee;
+
+  constructor(private authService: AuthService) {}
 
   ngOnInit() {
+    this.user = this.authService.getUser();
     const organizedData = this.assignments.reduce((acc, assignment) => {
       const convertedAssignment = assignment.event as IEvent;
       if (!acc[convertedAssignment._id]) {
@@ -25,10 +30,11 @@ export class PenugasanKaryawanListComponent implements OnInit {
       return acc;
     }, {});
 
-    console.log(organizedData);
-    console.log(Object.keys(organizedData));
-
     this.assignmentOrganized = organizedData;
     this.assignmentKeys = Object.keys(organizedData);
+  }
+
+  setAnAssignment($event) {
+    this.setAssignment.emit($event);
   }
 }

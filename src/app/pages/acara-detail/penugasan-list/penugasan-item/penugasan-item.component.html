@@ -7,7 +7,7 @@
         value=""
         id="{{ assignment.assignment }}"
         [checked]="assignment.isFinished"
-        (change)="setStatus()"
+        (click)="setStatus()"
       />
       <label class="form-check-label" for="{{ assignment.assignment }}">
         {{ assignment.assignment }} -

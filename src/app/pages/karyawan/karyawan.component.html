@@ -1,12 +1,13 @@
 <div class="container mt-5">
   <div class="row">
     <div class="col-md-3 col-sm-12">
-      <app-karyawan-categories
-        *ngFor="let position of employeePosition"
-        [position]="position"
-        (setSelectedEmployees)="setSelectedEmployees($event)"
-      >
-      </app-karyawan-categories>
+      <div *ngFor="let position of employeePosition">
+        <app-karyawan-categories
+          [position]="position"
+          (setSelectedEmployees)="setSelectedEmployees($event)"
+        >
+        </app-karyawan-categories>
+      </div>
       <hr />
       <div
         class="mb-3"
