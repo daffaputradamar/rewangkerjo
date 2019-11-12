@@ -49,7 +49,7 @@ export interface IEmployee {
 }
 
 export interface IVendor {
-  _id: string;
+  _id?: string;
   name: string;
   phone: string;
 }

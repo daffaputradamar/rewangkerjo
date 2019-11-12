@@ -70,7 +70,7 @@
                   *ngFor="let category of categories"
                   [value]="category._id"
                 >
-                  {{ category.name }}
+                  {{ category.name.toUpperCase() }}
                 </option>
               </select>
             </div>

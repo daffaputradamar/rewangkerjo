@@ -1,0 +1,20 @@
+<li>
+  <div class="row">
+    <div class="col-11">{{ vendor.name }} - ({{ vendor.phone }})</div>
+    <div class="col-1">
+      <div class="dropdown text-right">
+        <span
+          role="button"
+          id="dropdownDeleteVendor"
+          data-toggle="dropdown"
+          aria-haspopup="true"
+          aria-expanded="false"
+          ><fa-icon [icon]="faEllipsisV"></fa-icon
+        ></span>
+        <div class="dropdown-menu" aria-labelledby="dropdownDeleteVendor">
+          <a class="dropdown-item" (click)="deleteVendor()">Delete</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</li>

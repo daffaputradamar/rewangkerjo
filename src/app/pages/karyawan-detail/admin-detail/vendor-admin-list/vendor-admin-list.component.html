@@ -1,0 +1,41 @@
+<div class="row mt-5 mb-3 align-items-center">
+  <div class="col-6 text-left">
+    <h5 class="font-weight-bolder">List Vendor</h5>
+  </div>
+  <div class="col-6 text-right">
+    <fa-icon [icon]="faEdit" (click)="setEditVendor()"></fa-icon>
+  </div>
+</div>
+<div class="mt-3 mb-3" *ngIf="editVendor">
+  <div class="row align-items-end">
+    <div class="col-sm-6 col-md-4">
+      <label for="vendorName">Nama Vendor</label>
+      <input
+        id="vendorName"
+        type="text"
+        class="form-control"
+        [(ngModel)]="inputName"
+      />
+    </div>
+    <div class="col-sm-6 col-md-4">
+      <label for="vendorPhone">No Telp</label>
+      <input
+        id="vendorPhone"
+        type="text"
+        class="form-control"
+        [(ngModel)]="inputPhone"
+      />
+    </div>
+    <div class="col-sm-12 col-md-4">
+      <button class="btn btn-block btn-purple" (click)="addAVendor()">
+        Tambah
+      </button>
+    </div>
+  </div>
+</div>
+<ul *ngFor="let vendor of vendors">
+  <app-vendor-admin-item
+    (deleteAVendor)="deleteAVendor($event)"
+    [vendor]="vendor"
+  ></app-vendor-admin-item>
+</ul>
