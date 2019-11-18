@@ -13,7 +13,7 @@ import { AuthService } from "src/app/services/auth.service";
 export class AcaraComponent implements OnInit {
   categories: ICategory[];
   events: IEvent[];
-  user: IEmployee | IAdmin;
+  user;
   loading = false;
 
   eventsOngoing: IEvent[];
