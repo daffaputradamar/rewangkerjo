@@ -14,11 +14,13 @@ export class PenugasanItemComponent implements OnInit {
   @Output() deleteAnAssignment = new EventEmitter<string>();
   faEllipsisV = faEllipsisV;
 
-  employee = this.assignment.employee as IEmployee;
+  employee: IEmployee;
 
   constructor() {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.employee = this.assignment.employee as IEmployee;
+  }
 
   setStatus() {
     if (this.employee._id !== this.user._id) {
