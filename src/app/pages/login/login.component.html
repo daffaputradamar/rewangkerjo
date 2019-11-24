@@ -23,7 +23,10 @@
           </button>
         </div>
         <div class="clearfix"></div>
-        <form class="mt-5" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <div *ngIf="isLoginFailed" class="alert alert-purple mt-3" role="alert">
+          Username atau Password salah
+        </div>
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
           <div class="form-group mb-5">
             <label for="username" class="font-weight-bold">Username</label>
             <input

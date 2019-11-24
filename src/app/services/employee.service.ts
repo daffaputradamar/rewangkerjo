@@ -47,6 +47,14 @@ export class EmployeeService {
     );
   }
 
+  public resetPassword(id: string, data: any): Observable<IEmployee> {
+    return this.http.put<IEmployee>(
+      `${this.apiUrl}/employee/${id}/reset`,
+      data,
+      this.httpOptions
+    );
+  }
+
   public deleteEmployee(id: string): Observable<IEmployee> {
     return this.http.delete<IEmployee>(
       `${this.apiUrl}/employee/${id}`,

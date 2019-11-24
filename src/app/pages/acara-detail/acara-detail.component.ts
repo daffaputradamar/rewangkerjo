@@ -37,6 +37,7 @@ export class AcaraDetailComponent implements OnInit {
   selectedEmployeeAssignment: string;
   selectedVendor: string;
   inputAssignment: string;
+  inputDeadline: Date;
 
   editPanitia = false;
   editVendor = false;
@@ -123,6 +124,7 @@ export class AcaraDetailComponent implements OnInit {
     const newAssignment: IAssignment = {
       assignment: this.inputAssignment,
       isFinished: false,
+      deadline: this.inputDeadline,
       employee: this.selectedEmployeeAssignment,
       event: this.event._id
     };

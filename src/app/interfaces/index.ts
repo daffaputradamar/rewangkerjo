@@ -33,6 +33,7 @@ export interface IAssignment {
   _id?: string;
   assignment: string;
   isFinished: boolean;
+  deadline: Date;
   employee: string | IEmployee;
   event: string | IEvent;
 }

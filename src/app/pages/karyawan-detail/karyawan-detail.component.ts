@@ -18,6 +18,7 @@ export class KaryawanDetailComponent implements OnInit {
   user;
   id: string;
   editStatus = false;
+  editReset = false;
   loading = false;
   isAdmin: boolean;
 
@@ -30,6 +31,8 @@ export class KaryawanDetailComponent implements OnInit {
   inputAddress: string;
   inputPhone: string;
   inputUsername: string;
+
+  inputPassword: string;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -60,6 +63,10 @@ export class KaryawanDetailComponent implements OnInit {
     this.editStatus = !this.editStatus;
   }
 
+  setEditReset() {
+    this.editReset = !this.editReset;
+  }
+
   editEmployee() {
     const newEmployee = {
       address: this.inputAddress,
@@ -75,6 +82,18 @@ export class KaryawanDetailComponent implements OnInit {
           this.setEditStatus();
           this.resetForm();
         });
+      });
+  }
+
+  resetPassword() {
+    const newPassword = {
+      password: this.inputPassword
+    };
+    this.employeeService
+      .resetPassword(this.employee._id, newPassword)
+      .subscribe(newEmployee => {
+        this.setEditReset();
+        this.inputPassword = "";
       });
   }
 

@@ -124,7 +124,27 @@
         <div *ngIf="!editStatus">
           <h6 class="float-left font-weight-bolder">Username</h6>
           <p class="float-right">{{ employee.username }}</p>
-          <div class="clearfix"></div>
+          <div class="clearfix mb-2"></div>
+          <div *ngIf="isAdmin">
+            <button
+              class="btn btn-sm btn-outline-purple"
+              (click)="setEditReset()"
+            >
+              Reset Password?
+            </button>
+
+            <div class="row justify-content-between mt-3" *ngIf="editReset">
+              <input
+                type="password"
+                class="form-control col-sm-7 ml-2"
+                id="inputPassword"
+                [(ngModel)]="inputPassword"
+              />
+              <button class="btn btn-purple col-sm-4" (click)="resetPassword()">
+                Submit
+              </button>
+            </div>
+          </div>
         </div>
         <div *ngIf="editStatus">
           <div class="form-group row">

@@ -36,8 +36,8 @@ export class AuthService {
 
   constructor(private router: Router, private http: HttpClient) {}
 
-  public login(user: IUser) {
-    this.http
+  public async login(user: IUser): Promise<boolean> {
+    await this.http
       .post<IToken>(`${this.apiUrl}/employee/login`, {
         username: user.username,
         password: user.password
@@ -49,12 +49,17 @@ export class AuthService {
           localStorage.setItem("user", JSON.stringify(decode(this.jwt).data));
           this.setLoginStatus(true);
           this.router.navigate(["/acara"]);
+        } else {
+          this.router.navigate(["/login"], {
+            queryParams: { success: false }
+          });
         }
       });
+    return false;
   }
 
-  public loginAdmin(user: IUser) {
-    this.http
+  public async loginAdmin(user: IUser): Promise<boolean> {
+    await this.http
       .post<IToken>(`${this.apiUrl}/admin/login`, {
         username: user.username,
         password: user.password
@@ -66,8 +71,13 @@ export class AuthService {
           localStorage.setItem("user", JSON.stringify(decode(this.jwt).data));
           this.setLoginStatus(true);
           this.router.navigate(["/acara"]);
+        } else {
+          this.router.navigate(["/login"], {
+            queryParams: { success: false }
+          });
         }
       });
+    return false;
   }
 
   public logout() {

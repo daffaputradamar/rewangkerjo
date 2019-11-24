@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
 import { IAssignment, IAdmin, IEmployee } from "src/app/interfaces";
 import { faEllipsisV } from "@fortawesome/free-solid-svg-icons";
+import { formatDate } from "src/assets/util/formatDate";
 
 @Component({
   selector: "app-penugasan-item",
@@ -13,6 +14,8 @@ export class PenugasanItemComponent implements OnInit {
   @Output() setAssignmentStatus = new EventEmitter<string>();
   @Output() deleteAnAssignment = new EventEmitter<string>();
   faEllipsisV = faEllipsisV;
+  formattedDate: string;
+  doesDeadlineExceeded: boolean;
 
   employee: IEmployee;
 
@@ -20,6 +23,8 @@ export class PenugasanItemComponent implements OnInit {
 
   ngOnInit() {
     this.employee = this.assignment.employee as IEmployee;
+    this.formattedDate = formatDate(this.assignment.deadline);
+    this.doesDeadlineExceeded = new Date(this.assignment.deadline) < new Date();
   }
 
   setStatus() {
