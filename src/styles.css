@@ -19,6 +19,10 @@ body {
   text-decoration: none !important;
 }
 
+.hover-hand:hover {
+  cursor: pointer;
+}
+
 .text-purple {
   color: #897d96;
 }

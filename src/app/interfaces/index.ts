@@ -64,3 +64,15 @@ export interface IToken {
   success?: boolean;
   token: string;
 }
+
+// type:
+// 1 = acara,
+// 2 = penugasan
+export interface INotification {
+  isRead: boolean;
+  type: number;
+  idReference: string;
+  user: string;
+  message: string;
+  createdAt: Date;
+}
