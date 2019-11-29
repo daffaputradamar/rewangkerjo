@@ -24,7 +24,9 @@ export class PenugasanItemComponent implements OnInit {
   ngOnInit() {
     this.employee = this.assignment.employee as IEmployee;
     this.formattedDate = formatDate(this.assignment.deadline);
-    this.doesDeadlineExceeded = new Date(this.assignment.deadline) < new Date();
+    this.doesDeadlineExceeded =
+      new Date(this.assignment.deadline) < new Date() &&
+      !this.assignment.isFinished;
   }
 
   setStatus() {

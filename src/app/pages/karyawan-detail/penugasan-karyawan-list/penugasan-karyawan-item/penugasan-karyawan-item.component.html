@@ -9,6 +9,15 @@
     />
     <label class="form-check-label" for="{{ assignment.assignment }}">
       {{ assignment.assignment }}
+      <small class="text-muted"
+        >{{ formattedDate }}
+        <span
+          *ngIf="doesDeadlineExceeded"
+          class="text-danger font-weight-bolder"
+        >
+          - Tugas telah melebihi deadline</span
+        ></small
+      >
     </label>
   </div>
 </li>
